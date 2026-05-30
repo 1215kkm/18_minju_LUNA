@@ -46,19 +46,23 @@ function ItemSection() {
   return (
     <section
       id="new-in"
-      className="flex flex-col justify-start px-12 md:px-20 lg:px-28 xl:px-40 pt-[220px] pb-10"
-      style={{ background: '#F1EEF1', scrollSnapAlign: 'center', minHeight: '88vh' }}
+      className="snap-section flex flex-col justify-center"
+      style={{ background: '#F1EEF1', height: '85vh', scrollSnapAlign: 'center' }}
     >
-      {/* 헤딩 — GFS Didot */}
-      <h2 className="font-didot text-[20px] md:text-[24px] font-normal text-[#1a1a1a] tracking-[0.02em] mb-10">
-        This Week's New
-      </h2>
+      {/* 타이틀 */}
+      <div className="pl-16 md:pl-24 lg:pl-32 xl:pl-40 mb-12 -mt-[20px]">
+        <h2 className="font-didot text-[30px] md:text-[36px] font-normal text-[#1a1a1a] leading-[1.1]">
+          This Week's New
+        </h2>
+      </div>
 
       {/* 아이템 그리드 */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-        {ITEMS.map((item, i) => (
-          <ItemCard key={item.id} item={item} img={ITEM_IMGS[i]} />
-        ))}
+      <div className="px-12 md:px-20 lg:px-28 xl:px-40">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 w-full">
+          {ITEMS.map((item, i) => (
+            <ItemCard key={item.id} item={item} img={ITEM_IMGS[i]} />
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -5,7 +5,7 @@ import right2 from '../../assets/images/main/section01_right2.png'
 const SLIDES = [right1, right2]
 
 function Section01() {
-  const { current, key } = useAutoSlide(SLIDES.length, 4500)
+  const { current, key } = useAutoSlide(SLIDES.length, 3500)
 
   return (
     <section
@@ -14,9 +14,9 @@ function Section01() {
       style={{ background: '#FDFDFD' }}
     >
       {/* 좌측 텍스트 — 수직·수평 중앙 */}
-      <div className="w-full md:w-1/2 flex flex-col items-center justify-end text-center px-16 md:px-24 lg:px-32 pb-52">
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-end text-center px-16 md:px-24 lg:px-32 pb-[178px]">
         {/* GFS Didot 타이틀 */}
-        <h2 className="font-didot text-[20px] md:text-[22px] lg:text-[24px] font-normal text-[#1a1a1a] tracking-[0.04em] mb-4 leading-snug">
+        <h2 className="font-didot text-[24px] md:text-[28px] lg:text-[32px] font-normal text-[#1a1a1a] tracking-[0.04em] mb-4 leading-snug">
           Light, In Its Softest Form
         </h2>
 

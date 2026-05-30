@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { BEST_COLLECTION } from '../../constants'
 import detail1 from '../../assets/images/main/detail_01.png'
 import detail2 from '../../assets/images/main/detail_02.png'
@@ -9,6 +9,29 @@ const DETAIL_IMGS = [detail1, detail2, detail3, detail4]
 
 function BestCollectionSection() {
   const [activeIdx, setActiveIdx] = useState(0)
+  const isHoveringRef = useRef(false)
+  const timerRef = useRef(null)
+
+  useEffect(() => {
+    const start = () => {
+      timerRef.current = setInterval(() => {
+        if (!isHoveringRef.current) {
+          setActiveIdx((prev) => (prev + 1) % BEST_COLLECTION.length)
+        }
+      }, 3500)
+    }
+    start()
+    return () => clearInterval(timerRef.current)
+  }, [])
+
+  const handleMouseEnter = (i) => {
+    isHoveringRef.current = true
+    setActiveIdx(i)
+  }
+
+  const handleMouseLeave = () => {
+    isHoveringRef.current = false
+  }
 
   return (
     <section
@@ -27,12 +50,12 @@ function BestCollectionSection() {
       <div className="flex items-stretch">
 
         {/* 좌측 리스트 */}
-        <ul className="flex flex-col justify-between pl-24 md:pl-36 lg:pl-48 xl:pl-56 pr-8 w-[50%]">
+        <ul className="flex flex-col justify-between pl-24 md:pl-36 lg:pl-48 xl:pl-56 pr-8 w-[50%]" onMouseLeave={handleMouseLeave}>
           {BEST_COLLECTION.map((item, i) => (
             <li
               key={item.id}
               className="flex items-start gap-12 cursor-pointer py-5"
-              onMouseEnter={() => setActiveIdx(i)}
+              onMouseEnter={() => handleMouseEnter(i)}
             >
               <span className={`font-pretendard text-[14px] font-light w-8 flex-shrink-0 mt-1 transition-colors duration-300 ${
                 activeIdx === i ? 'text-[#5a5560]' : 'text-[#ccc8d4]'
@@ -74,7 +97,7 @@ function BestCollectionSection() {
               key={i}
               src={src}
               alt={BEST_COLLECTION[i].name}
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
               style={{ opacity: i === activeIdx ? 1 : 0 }}
             />
           ))}

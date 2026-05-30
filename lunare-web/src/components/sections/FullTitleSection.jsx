@@ -5,7 +5,7 @@ import fullImg2 from '../../assets/images/main/full_img02.png'
 const SLIDES = [fullImg1, fullImg2]
 
 function FullTitleSection() {
-  const { current } = useAutoSlide(SLIDES.length, 5000)
+  const { current } = useAutoSlide(SLIDES.length, 4000)
 
   return (
     <section id="beauty" className="snap-section relative overflow-hidden">

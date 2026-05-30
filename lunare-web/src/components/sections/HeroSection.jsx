@@ -1,8 +1,42 @@
+import { useEffect, useRef } from 'react'
 import logoImg from '../../assets/images/main/logo_img.png'
 import heroLeft from '../../assets/images/main/hero_left.png'
 import heroRight from '../../assets/images/main/hero_right.png'
 
 function HeroSection() {
+  const logoWrapRef = useRef(null)
+  const readyRef = useRef(false)
+  const rafRef = useRef(null)
+
+  useEffect(() => {
+    const timer = setTimeout(() => { readyRef.current = true }, 1000)
+
+    const container = document.querySelector('.snap-container')
+    if (!container) return
+
+    const handleScroll = () => {
+      if (!readyRef.current) return
+      if (rafRef.current) return  // 이미 프레임 예약됨
+
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null
+        if (!logoWrapRef.current) return
+        const progress = Math.min(container.scrollTop / container.clientHeight, 1)
+        const scale = 1 + Math.pow(progress, 0.6) * 4
+        const opacity = Math.max(0, 1 - Math.pow(progress / 0.8, 2.5))
+        logoWrapRef.current.style.transform = `scale(${scale})`
+        logoWrapRef.current.style.opacity = String(opacity)
+      })
+    }
+
+    container.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      clearTimeout(timer)
+      cancelAnimationFrame(rafRef.current)
+      container.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <section id="hero" className="snap-section relative w-full">
       {/* 배경 이미지 2분할 */}
@@ -18,8 +52,12 @@ function HeroSection() {
       {/* 미묘한 오버레이 */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/10 pointer-events-none" />
 
-      {/* LUNARÉ 로고 — 하단에서 50px 위 */}
-      <div className="absolute inset-x-0 pointer-events-none" style={{ bottom: '50px' }}>
+      {/* LUNARÉ 로고 — 스크롤 시 확대·페이드아웃 */}
+      <div
+        ref={logoWrapRef}
+        className="absolute inset-x-0 pointer-events-none"
+        style={{ bottom: '60px', transformOrigin: 'center bottom', willChange: 'transform, opacity' }}
+      >
         <img
           src={logoImg}
           alt="LUNARÉ"

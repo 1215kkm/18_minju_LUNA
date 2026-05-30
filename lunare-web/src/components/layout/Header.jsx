@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import smallLogo from '../../assets/images/main/small_logo.png'
 
 // 이미지(dark) 위 섹션 id 목록
 const DARK_SECTIONS = ['hero', 'beauty']
@@ -28,8 +27,7 @@ function Header() {
     return () => observer.disconnect()
   }, [])
 
-  const textColor  = isDark ? 'text-white'    : 'text-[#1a1a1a]'
-  const logoFilter = isDark ? 'brightness-0 invert' : 'brightness-0'
+  const textColor = isDark ? 'text-white' : 'text-[#1a1a1a]'
 
   return (
     <header
@@ -54,15 +52,6 @@ function Header() {
             </svg>
           </button>
         </div>
-
-        {/* 중앙 — LUNARÉ 로고 (항상 표시) */}
-        <a href="#hero" className="absolute left-1/2 -translate-x-1/2">
-          <img
-            src={smallLogo}
-            alt="LUNARÉ"
-            className={`h-[13px] object-contain transition-all duration-500 ${logoFilter}`}
-          />
-        </a>
 
         {/* 우측 — 로그인 + 장바구니 */}
         <div className={`flex items-center gap-6 transition-colors duration-500 ${textColor}`}>

@@ -2,8 +2,6 @@
 .snap-container {
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
 }
 
 .snap-section {
@@ -44,8 +42,8 @@
 }
 
 .logo-animate {
-  animation: logoFadeIn 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-             logoGlow 3s ease-in-out 1.6s infinite;
+  animation: logoFadeIn 3s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+             logoGlow 3s ease-in-out 3s infinite;
 }
 
 /* 슬라이드 전환 */
