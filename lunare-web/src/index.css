@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "./styles/globals.css";
+
+@font-face {
+  font-family: 'GFS Didot';
+  src: url('./assets/fonts/GFSDidot-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img, video {
+    max-width: 100%;
+    display: block;
+  }
+}
+
+/* 폰트 유틸 클래스 */
+.font-didot {
+  font-family: 'GFS Didot', Georgia, serif;
+}
+
+.font-pretendard {
+  font-family: 'Pretendard', -apple-system, sans-serif;
+}

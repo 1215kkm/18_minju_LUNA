@@ -1,0 +1,96 @@
+/* 스크롤 스냅 */
+.snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 헤더 높이 변수 */
+:root {
+  --header-h: 64px;
+}
+
+/* 로고 애니메이션 */
+@keyframes logoFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px);
+  }
+  60% {
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 28px rgba(255,255,255,0.7));
+  }
+}
+
+.logo-animate {
+  animation: logoFadeIn 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             logoGlow 3s ease-in-out 1.6s infinite;
+}
+
+/* 슬라이드 전환 */
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.slide-enter {
+  animation: slideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 아이템 호버 오버레이 */
+.item-card .overlay {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.item-card:hover .overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* best collection 호버 라인 */
+.collection-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #1a1a1a;
+  transition: width 0.4s ease;
+}
+.collection-item:hover::after {
+  width: 100%;
+}
+
+/* 헤더는 항상 배경 없음 — 섹션 색상으로 텍스트만 전환 */
+
+/* 커스텀 스크롤바 숨김 */
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
+.snap-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
