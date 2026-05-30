@@ -3,11 +3,11 @@ import smallLogo from '../../assets/images/main/small_logo.png'
 
 function Footer() {
   return (
-    <footer className="bg-[#111] text-white/55 px-12 md:px-20 lg:px-28 xl:px-40 pt-20 pb-10">
+    <footer className="bg-[#6e6a85] text-white/55 px-12 md:px-20 lg:px-28 xl:px-40 pt-20 pb-10">
       <div className="flex flex-col md:flex-row gap-16 md:gap-0 justify-between mb-16">
         {/* 브랜드 */}
         <div className="flex-shrink-0">
-          <img src={smallLogo} alt="LUNARÉ" className="h-[13px] object-contain mb-7 opacity-70" />
+          <img src={smallLogo} alt="LUNARÉ" className="h-[17px] object-contain mb-7" style={{ filter: 'brightness(0) invert(1)' }} />
           <p className="font-pretendard text-[12px] leading-[2] font-light max-w-[200px]">
             Light in its softest form.<br />
             Beauty distilled to its essence.

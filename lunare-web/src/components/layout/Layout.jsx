@@ -25,6 +25,13 @@ function Layout({ children }) {
 
     let snapCache = []
     let snapping = false
+    let snapTimeout = null
+
+    const setSnapping = (val) => {
+      snapping = val
+      if (snapTimeout) clearTimeout(snapTimeout)
+      if (val) snapTimeout = setTimeout(() => { snapping = false }, 1500)
+    }
 
     const buildCache = () => {
       const sections = Array.from(container.querySelectorAll('.snap-section[id]'))
@@ -55,11 +62,11 @@ function Layout({ children }) {
         if (y >= snapTop - 1 && y < nextSnapTop) {
           const progress = (y - snapTop) / height
           if (progress >= SNAP_DOWN && i + 1 < snapCache.length) {
-            snapping = true
+            setSnapping(true)
             lenis.scrollTo(snapCache[i + 1].snapTop, {
               duration: 1.0,
               easing: (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
-              onComplete: () => { snapping = false },
+              onComplete: () => setSnapping(false),
             })
           }
           break
@@ -76,6 +83,7 @@ function Layout({ children }) {
 
     return () => {
       clearTimeout(initTimer)
+      clearTimeout(snapTimeout)
       cancelAnimationFrame(rafId)
       window.removeEventListener('resize', buildCache)
       lenis.destroy()
