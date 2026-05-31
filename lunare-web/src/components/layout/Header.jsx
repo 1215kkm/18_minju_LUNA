@@ -19,7 +19,7 @@ const shopMenuItems = [
   { label: 'Balm', href: '#/shop/balm' },
 ]
 
-function Header({ tone = 'auto', showLogo = true }) {
+function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
   const [autoDark, setAutoDark] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
   const [shopOpen, setShopOpen] = useState(false)
@@ -70,7 +70,9 @@ function Header({ tone = 'auto', showLogo = true }) {
 
   const headerOnDark = isDark && !menuOpen
   const textColor = headerOnDark ? 'text-white' : 'text-[#1a1a1a]'
-  const logoFilter = headerOnDark ? 'brightness(0) invert(1)' : 'none'
+  const rightTextColor = rightTone ? (rightTone === 'dark' ? 'text-white' : 'text-[#1a1a1a]') : textColor
+  const logoOnDark = logoTone ? logoTone === 'dark' : headerOnDark
+  const logoFilter = logoOnDark ? 'brightness(0) invert(1)' : 'none'
 
   return (
     <header
@@ -158,16 +160,13 @@ function Header({ tone = 'auto', showLogo = true }) {
         )}
 
         {/* 우측 — 로그인 + 장바구니 */}
-        <div className={`flex items-center gap-4 transition-colors duration-500 md:gap-6 ${textColor}`}>
+        <div className={`flex items-center gap-4 transition-colors duration-500 md:gap-6 ${rightTextColor}`}>
           <a
             href="#/login"
-            className="font-pretendard hidden items-center gap-1.5 text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity sm:flex"
+            className="font-pretendard hidden items-center text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity sm:flex"
             onClick={closeMenus}
           >
             로그인
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-              <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-            </svg>
           </a>
           <button className="font-pretendard text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity">
             장바구니
