@@ -9,6 +9,7 @@ import ProductDetailPage from './components/pages/ProductDetailPage'
 import LoginPage from './components/pages/LoginPage'
 import SignupPage from './components/pages/SignupPage'
 import HighlighterShopPage from './components/pages/HighlighterShopPage'
+import BrandPage from './components/pages/BrandPage'
 
 function App() {
   const [hash, setHash] = useState(window.location.hash)
@@ -33,6 +34,10 @@ function App() {
 
   if (hash === '#/signup') {
     return <SignupPage />
+  }
+
+  if (hash === '#/brand') {
+    return <BrandPage />
   }
 
   return (

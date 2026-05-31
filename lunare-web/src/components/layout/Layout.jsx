@@ -91,7 +91,7 @@ function Layout({ children }) {
 
   return (
     <>
-      <Header />
+      <Header showLogo={false} />
       <div className="snap-container" ref={containerRef}>
         <div>
           <main>{children}</main>

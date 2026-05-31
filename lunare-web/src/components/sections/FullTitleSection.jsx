@@ -35,7 +35,7 @@ function FullTitleSection() {
         {/* discover 버튼 — 검정 pill */}
         <div>
           <a
-            href="#collection"
+            href="#/brand"
             className="font-pretendard inline-flex items-center justify-center bg-[#1a1a1a] text-white text-[13px] tracking-[0.08em] font-light rounded-full px-7 py-3 hover:bg-[#3a3540] transition-colors duration-300"
           >
             discover
