@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Header from '../layout/Header'
+import Footer from '../layout/Footer'
 import moonVeilFront from '../../assets/images/shop/balm_h01.png'
 import pearlVeilMain from '../../assets/images/sub/pearl-veil-main-front_rbg.png'
 import pearlVeilSub from '../../assets/images/sub/pearl-veil-main-generated_rbg.png'
@@ -470,6 +471,7 @@ function ProductDetailPage() {
           </div>
         </section>
       </main>
+      <Footer compact />
     </div>
   )
 }

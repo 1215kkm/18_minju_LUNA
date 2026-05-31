@@ -25,6 +25,24 @@ const categories = [
 
 const products = [
   {
+    id: 'lucent-veil',
+    name: 'Lucent Veil',
+    nameKo: '루센트 베일',
+    category: 'Base Glow',
+    price: '$27',
+    image: glowB01,
+    groups: ['all', 'best-sellers'],
+  },
+  {
+    id: 'moon-veil',
+    name: 'Moon Veil',
+    nameKo: '문 베일',
+    category: 'Balm Highlighter',
+    price: '$21',
+    image: balmH01,
+    groups: ['all', 'balm', 'best-sellers'],
+  },
+  {
     id: 'prism-drop',
     name: 'Prism Drop',
     nameKo: '프리즘 드롭',
@@ -59,15 +77,6 @@ const products = [
     price: '$24',
     image: liquidH04,
     groups: ['all', 'liquid'],
-  },
-  {
-    id: 'moon-veil',
-    name: 'Moon Veil',
-    nameKo: '문 베일',
-    category: 'Balm Highlighter',
-    price: '$21',
-    image: balmH01,
-    groups: ['all', 'balm', 'best-sellers'],
   },
   {
     id: 'lilac-glow',
@@ -133,15 +142,6 @@ const products = [
     image: multiB03,
     groups: ['all'],
   },
-  {
-    id: 'lucent-veil',
-    name: 'Lucent Veil',
-    nameKo: '루센트 베일',
-    category: 'Base Glow',
-    price: '$27',
-    image: glowB01,
-    groups: ['all', 'best-sellers'],
-  },
 ]
 
 const newProducts = [
@@ -185,11 +185,13 @@ const pageCopy = {
     eyebrow: 'New In',
     title: 'This week, softly.',
     heading: 'New',
+    heroImage: subHero,
   },
   'best-sellers': {
     eyebrow: 'Best Sellers',
     title: 'Most loved glow.',
     heading: 'Best Sellers',
+    heroImage: subHero,
   },
   all: {
     eyebrow: 'Highlighter Collection',
@@ -201,11 +203,13 @@ const pageCopy = {
     eyebrow: 'Liquid Highlighter',
     title: 'A fluid veil of light.',
     heading: 'Liquid',
+    heroImage: subHero,
   },
   balm: {
     eyebrow: 'Balm Highlighter',
     title: 'Glow that melts in.',
     heading: 'Balm',
+    heroImage: subHero,
   },
 }
 
@@ -222,18 +226,18 @@ function getProductsForPage(activePage) {
 
 function CategoryNav({ activePage }) {
   return (
-    <nav className="mx-auto grid max-w-[1140px] grid-cols-2 gap-y-7 px-6 pt-[132px] font-pretendard text-[12px] font-light text-[#aaa3b1] md:grid-cols-5 md:px-10 md:pt-[150px]">
+    <nav className="grid w-full grid-cols-2 gap-y-5 font-pretendard text-[12px] font-light text-[#9b94a4] md:grid-cols-5">
       {categories.map((category) => (
         <a
           key={category.key}
           href={category.path}
-          className={`relative text-center transition-colors duration-300 hover:text-[#2c2731] ${
+          className={`relative flex h-10 items-center justify-center text-center transition-colors duration-300 hover:text-[#2c2731] ${
             category.key === activePage ? 'text-[#2c2731]' : ''
           }`}
           onClick={() => window.scrollTo(0, 0)}
         >
           {category.key === activePage && (
-            <span className="absolute left-1/2 top-[-13px] h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[#2c2731]" />
+            <span className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[#2c2731]" />
           )}
           {category.label}
         </a>
@@ -242,38 +246,30 @@ function CategoryNav({ activePage }) {
   )
 }
 
-function BannerPlaceholder({ copy }) {
+function ShopHero({ activePage, copy }) {
   return (
-    <section className="mx-auto mt-12 max-w-[1280px] px-5 md:px-10">
-      <div className="relative flex aspect-[4.8/1] min-h-[145px] items-center overflow-hidden bg-[#e7e4ec] px-8 md:min-h-[170px] md:px-14">
-        {copy.heroImage ? (
-          <>
-            <img
-              src={copy.heroImage}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-              aria-hidden="true"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(24,22,30,0.46),rgba(24,22,30,0.14)_48%,rgba(24,22,30,0.02))]" />
-          </>
-        ) : (
-          <>
-            <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.58),rgba(255,255,255,0.12)_45%,rgba(111,104,132,0.12))]" />
-            <div className="absolute right-[8%] top-1/2 h-[76%] w-[26%] -translate-y-1/2 rounded-full border border-white/45" />
-            <div className="absolute right-[20%] top-[18%] h-[50%] w-px rotate-[58deg] bg-white/55" />
-          </>
-        )}
-        <div className="relative max-w-[390px]">
-          <p className={`mb-4 font-pretendard text-[10px] font-light uppercase tracking-[0.28em] ${
-            copy.heroImage ? 'text-white/70' : 'text-[#8f8799]'
-          }`}>
-            {copy.eyebrow}
-          </p>
-          <h1 className={`font-didot text-[32px] font-normal leading-[1.08] md:text-[44px] ${
-            copy.heroImage ? 'text-white' : 'text-[#2c2731]'
-          }`}>
-            {copy.title}
-          </h1>
+    <section className="relative isolate overflow-hidden bg-[#f6f3f8] pt-[var(--header-h)]">
+      <img
+        src={copy.heroImage}
+        alt=""
+        className="absolute inset-0 -z-20 h-full w-full object-cover opacity-36"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(251,250,252,0.58),rgba(251,250,252,0.28)_42%,rgba(251,250,252,0.78)_76%,#fbfafc_100%)]" />
+      <div className="mx-auto flex min-h-[240px] max-w-[1440px] flex-col px-5 md:min-h-[285px] md:px-10">
+        <div className="flex min-w-0 flex-1 items-start justify-center pb-5 pt-6 text-center md:pb-6 md:pt-7">
+          <div className="mx-auto w-full max-w-[260px] md:max-w-[520px]">
+            <p className="mb-4 font-pretendard text-[9px] font-light uppercase tracking-[0.28em] text-[#8f8799]">
+              {copy.eyebrow}
+            </p>
+            <h1 className="font-didot text-[28px] font-normal leading-[1.08] text-[#2c2731] md:text-[46px]">
+              {copy.title}
+            </h1>
+          </div>
+        </div>
+
+        <div className="border-t border-[#d9d3de]/70 py-3">
+          <CategoryNav activePage={activePage} />
         </div>
       </div>
     </section>
@@ -326,10 +322,9 @@ function HighlighterShopPage() {
     <div className="min-h-screen bg-[#fbfafc] text-[#211f24]">
       <Header tone="light" />
       <main>
-        <CategoryNav activePage={activePage} />
-        <BannerPlaceholder copy={copy} />
+        <ShopHero activePage={activePage} copy={copy} />
 
-        <section className="mx-auto max-w-[1440px] px-5 pb-24 pt-16 md:px-10 md:pt-20">
+        <section className="mx-auto max-w-[1440px] px-5 pb-24 pt-14 md:px-10 md:pt-18">
           <div className="mb-14 grid grid-cols-[1fr_auto_1fr] items-center font-pretendard">
             <button className="justify-self-start text-[12px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
               Filter by ▾
@@ -355,7 +350,7 @@ function HighlighterShopPage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer compact />
     </div>
   )
 }
