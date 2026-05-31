@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react'
 // 이미지(dark) 위 섹션 id 목록
 const DARK_SECTIONS = ['hero', 'beauty']
 
-function Header() {
-  const [isDark, setIsDark] = useState(true)
+function Header({ tone = 'auto' }) {
+  const [autoDark, setAutoDark] = useState(true)
+  const isDark = tone === 'auto' ? autoDark : tone === 'dark'
 
   useEffect(() => {
+    if (tone !== 'auto') return
+
     const container = document.querySelector('.snap-container')
     if (!container) return
 
@@ -16,7 +19,7 @@ function Header() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            setIsDark(DARK_SECTIONS.includes(entry.target.id))
+            setAutoDark(DARK_SECTIONS.includes(entry.target.id))
           }
         })
       },
@@ -25,7 +28,7 @@ function Header() {
 
     sections.forEach((sec) => observer.observe(sec))
     return () => observer.disconnect()
-  }, [])
+  }, [tone])
 
   const textColor = isDark ? 'text-white' : 'text-[#1a1a1a]'
 

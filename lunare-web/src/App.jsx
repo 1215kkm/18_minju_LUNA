@@ -4,8 +4,15 @@ import Section01 from './components/sections/Section01'
 import ItemSection from './components/sections/ItemSection'
 import FullTitleSection from './components/sections/FullTitleSection'
 import BestCollectionSection from './components/sections/BestCollectionSection'
+import ProductDetailPage from './components/pages/ProductDetailPage'
 
 function App() {
+  const isProductPage = window.location.pathname.includes('/product')
+
+  if (isProductPage) {
+    return <ProductDetailPage />
+  }
+
   return (
     <Layout>
       <HeroSection />

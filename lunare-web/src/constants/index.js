@@ -9,10 +9,10 @@ export const NAV_LINKS = [
 ]
 
 export const ITEMS = [
-  { id: 1, name: 'MOON VEIL',  nameKo: '문 베일',    desc: '달빛이 가장 먼저\n피부에 내려앉는 순간',   shade: '#F0EDF5' },
-  { id: 2, name: 'LILAC GLOW', nameKo: '라일락 글로우', desc: '차가운 라벤더 빛이\n피부 위에 스며드는 시간', shade: '#E8E4F2' },
-  { id: 3, name: 'PINK AURA',  nameKo: '핑크 오라',   desc: '얼어붙은 오로라처럼\n투명하게 빛나는 핑크',   shade: '#F5E8EF' },
-  { id: 4, name: 'BLUE HAZE',  nameKo: '블루 헤이즈',  desc: '새벽 공기의 푸른\n고요한 광채',            shade: '#E4ECF5' },
+  { id: 1, slug: 'pearl-veil', name: 'PEARL VEIL', nameKo: '펄 베일',    desc: '달빛이 가장 먼저\n피부에 내려앉는 순간',   shade: '#F0EDF5' },
+  { id: 2, slug: 'lilac-glow', name: 'LILAC GLOW', nameKo: '라일락 글로우', desc: '차가운 라벤더 빛이\n피부 위에 스며드는 시간', shade: '#E8E4F2' },
+  { id: 3, slug: 'pink-aura',  name: 'PINK AURA',  nameKo: '핑크 오라',   desc: '얼어붙은 오로라처럼\n투명하게 빛나는 핑크',   shade: '#F5E8EF' },
+  { id: 4, slug: 'blue-haze',  name: 'BLUE HAZE',  nameKo: '블루 헤이즈',  desc: '새벽 공기의 푸른\n고요한 광채',            shade: '#E4ECF5' },
 ]
 
 export const BEST_COLLECTION = [

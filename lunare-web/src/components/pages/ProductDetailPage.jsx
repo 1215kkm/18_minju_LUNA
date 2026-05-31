@@ -1,0 +1,414 @@
+import { useMemo, useState } from 'react'
+import Header from '../layout/Header'
+import subItem1 from '../../assets/images/sub/sub_item1.png'
+import subItem2 from '../../assets/images/sub/sub_item2.png'
+import subItem3 from '../../assets/images/sub/sub_item3.png'
+import subItem4 from '../../assets/images/sub/sub_item4.png'
+import pearlVeilMain from '../../assets/images/sub/pearl-veil-main-front-soft.png'
+import pearlVeilSub from '../../assets/images/sub/pearl-veil-main-generated-soft.png'
+import pearlVeilParticle from '../../assets/images/sub/pearl-veil-particle-detail.png'
+import pearlVeilTexture from '../../assets/images/sub/pearl-veil-texture.png'
+import lilacGlowFront from '../../assets/images/sub/lilac-glow-front-soft.png'
+import lilacGlowSupport from '../../assets/images/sub/lilac-glow-support-soft.png'
+import lilacGlowTexture from '../../assets/images/sub/lilac-glow-texture.png'
+import pinkAuraFront from '../../assets/images/sub/pink-aura-front-soft.png'
+import pinkAuraSupport from '../../assets/images/sub/pink-aura-support-soft.png'
+import pinkAuraParticle from '../../assets/images/sub/pink-aura-particle-detail.png'
+import pinkAuraTexture from '../../assets/images/sub/pink-aura-texture.png'
+import blueHazeFront from '../../assets/images/sub/blue-haze-front-soft.png'
+import blueHazeSupport from '../../assets/images/sub/blue-haze-support-soft.png'
+import blueHazeTexture from '../../assets/images/sub/blue-haze-texture.png'
+
+const products = {
+  'pearl-veil': {
+    slug: 'pearl-veil',
+    aliases: ['moon-veil'],
+    name: 'Pearl Veil',
+    nameKo: '펄 베일',
+    weeklyText: '달빛이 가장 먼저\n피부에 내려앉는 순간',
+    price: '$21',
+    size: '6.5 g / 0.22 oz',
+    shade: '#F0EDF5',
+    type: 'Pearl balm',
+    swatches: ['01 Pearl', '02 Aura'],
+    description:
+      '달빛이 가장 먼저 피부에 내려앉는 순간. 투명한 아이보리 펄이 피부 위에 얇게 녹아드는 하이라이터 밤입니다. 과한 반짝임 없이 빛을 조용히 머금어, 달빛이 스친 듯 맑고 촉촉한 광채를 남깁니다.',
+    functions:
+      '광대, 눈두덩, 입술산, 쇄골 위에 투명한 펄 베일을 더해 은은한 입체감을 완성합니다.',
+    textureText:
+      '맑은 밤 타입으로 부드럽게 미끄러지듯 발리며, 끈적임 없이 촉촉한 윤기를 남깁니다.',
+    howTo:
+      '얼굴의 높은 부위에 가볍게 톡톡 얹은 뒤 손끝으로 부드럽게 블렌딩합니다. 더 선명한 광채를 원할 때는 얇게 한 번 더 레이어링하세요.',
+    active: ['문스톤 파우더', '바이올렛 펄 콤플렉스', '스쿠알란', '화이트 플라워 추출물'],
+    finish: '부드럽게 번지는 소프트 포커스 광채',
+    mood: '깨끗한 파우더리 무드, 흰 꽃잎, 차분한 피부 결',
+    gallery: [
+      {
+        label: 'Main',
+        caption: '정면에서 바라본 투명 케이스와 아이보리 펄 팬의 대표 컷',
+        image: pearlVeilMain,
+      },
+      {
+        label: 'Angle',
+        caption: '빛을 받는 투명 케이스의 입체감과 부드러운 광채를 보여주는 보조 컷',
+        image: pearlVeilSub,
+      },
+      {
+        label: 'Detail',
+        caption: '고운 샴페인 펄 입자와 촉촉한 소프트 글로우 텍스쳐',
+        image: pearlVeilParticle,
+      },
+    ],
+    textureImage: pearlVeilTexture,
+    cardImage: subItem1,
+  },
+  'lilac-glow': {
+    slug: 'lilac-glow',
+    name: 'Lilac Glow',
+    nameKo: '라일락 글로우',
+    weeklyText: '차가운 라벤더 빛이\n피부 위에 스며드는 시간',
+    price: '$24',
+    size: '6.5 g / 0.22 oz',
+    shade: '#E8E4F2',
+    type: 'Light base',
+    swatches: ['01 Lilac', '02 Mist'],
+    description:
+      '차가운 라벤더 빛이 피부 위에 스며드는 시간. 노란기를 차분하게 정리하고 맑은 라일락 펄을 얹어, 피부가 안쪽에서 환하게 켜진 듯한 투명한 베이스 광을 만듭니다.',
+    functions:
+      '칙칙한 부위, 콧대, 눈 앞머리, 볼 중앙에 라벤더 빛을 더해 피부 톤을 깨끗하고 차분하게 보정합니다.',
+    textureText:
+      '얇은 파우더 밤이 피부에 가볍게 밀착되어 들뜸 없이 보송하고 은은한 라일락 광을 남깁니다.',
+    howTo:
+      '베이스 메이크업 후 밝히고 싶은 부위에 가볍게 터치합니다. 넓은 부위에는 손끝으로 얇게 펴 바르고, 포인트 부위에는 한 번 더 얹어주세요.',
+    active: ['라벤더 펄 파우더', '클리어 글로우 콤플렉스', '세라마이드', '화이트 루핀 추출물'],
+    finish: '차분하게 밝아지는 클린 라일락 글로우',
+    mood: '맑은 라벤더 안개, 정돈된 피부 톤, 차가운 달빛',
+    gallery: [
+      {
+        label: 'Main',
+        caption: '정면에서 바라본 투명 케이스와 라일락 펄 팬의 대표 컷',
+        image: lilacGlowFront,
+      },
+      {
+        label: 'Angle',
+        caption: '차가운 라벤더 빛과 투명 케이스의 입체감을 보여주는 보조 컷',
+        image: lilacGlowSupport,
+      },
+      {
+        label: 'Detail',
+        caption: '고운 라일락 펄 입자가 부드럽게 펼쳐지는 질감 컷',
+        image: lilacGlowTexture,
+      },
+    ],
+    textureImage: lilacGlowTexture,
+    cardImage: subItem2,
+  },
+  'pink-aura': {
+    slug: 'pink-aura',
+    name: 'Pink Aura',
+    nameKo: '핑크 오라',
+    weeklyText: '얼어붙은 오로라처럼\n투명하게 빛나는 핑크',
+    price: '$19',
+    size: '6.5 g / 0.22 oz',
+    shade: '#F5E8EF',
+    type: 'Soft tint',
+    swatches: ['01 Pink', '02 Rose'],
+    description:
+      '얼어붙은 오로라처럼 투명하게 빛나는 핑크. 맑은 핑크 펄이 혈색을 과하게 올리지 않고 피부 위에 얇은 생기를 더해, 부드럽고 투명한 오라를 남깁니다.',
+    functions:
+      '볼 중앙, 눈두덩, 입술산에 은은한 핑크빛을 얹어 차분한 혈색과 부드러운 입체감을 동시에 더합니다.',
+    textureText:
+      '촉촉하게 녹는 소프트 밤 텍스쳐가 얇게 밀착되어 뭉침 없이 맑은 핑크 펄만 남깁니다.',
+    howTo:
+      '생기가 필요한 부위에 손끝으로 톡톡 얹고 경계를 부드럽게 풀어줍니다. 블러셔 위에 레이어링하면 더 투명한 핑크 광이 살아납니다.',
+    active: ['로즈 펄 파우더', '오로라 글로우 콤플렉스', '호호바 오일', '핑크 플라워 추출물'],
+    finish: '맑고 촉촉한 소프트 핑크 오라',
+    mood: '얼어붙은 장밋빛, 투명한 혈색, 조용한 생기',
+    gallery: [
+      {
+        label: 'Main',
+        caption: '정면에서 바라본 투명 케이스와 핑크 펄 팬의 대표 컷',
+        image: pinkAuraFront,
+      },
+      {
+        label: 'Angle',
+        caption: '빛을 받을 때 살아나는 핑크 오라와 케이스 광택을 보여주는 보조 컷',
+        image: pinkAuraSupport,
+      },
+      {
+        label: 'Detail',
+        caption: '맑은 핑크 펄 입자와 투명한 오라 색감이 보이는 디테일 컷',
+        image: pinkAuraParticle,
+      },
+    ],
+    textureImage: pinkAuraTexture,
+    cardImage: subItem3,
+  },
+  'blue-haze': {
+    slug: 'blue-haze',
+    name: 'Blue Haze',
+    nameKo: '블루 헤이즈',
+    weeklyText: '새벽 공기의 푸른\n고요한 광채',
+    price: '$22',
+    size: '6.5 g / 0.22 oz',
+    shade: '#E4ECF5',
+    type: 'Clear highlighter',
+    swatches: ['01 Haze', '02 Dew'],
+    description:
+      '새벽 공기의 푸른 고요한 광채. 옅은 블루 펄이 피부의 붉은 기를 맑게 정돈하고, 차분하고 투명한 수분광처럼 얼굴의 높은 부위를 깨끗하게 밝혀줍니다.',
+    functions:
+      '콧대, 광대, 눈 밑 삼각존, 쇄골 위에 푸른빛의 투명한 광을 더해 맑고 차분한 인상을 완성합니다.',
+    textureText:
+      '가볍고 투명한 밤 텍스쳐가 피부 위에서 얇게 녹아, 파우더리하지 않은 맑은 블루 펄만 남깁니다.',
+    howTo:
+      '차분하게 밝히고 싶은 부위에 소량을 얹어 얇게 펴 바릅니다. 붉은 기가 도는 부위에는 아주 얇게 블렌딩해 맑은 톤으로 정리하세요.',
+    active: ['블루 펄 파우더', '아쿠아 글로우 콤플렉스', '판테놀', '블루 로터스 추출물'],
+    finish: '맑고 서늘한 클리어 하이라이트',
+    mood: '새벽 안개, 차가운 수분감, 투명한 피부 결',
+    gallery: [
+      {
+        label: 'Main',
+        caption: '정면에서 바라본 투명 케이스와 블루 펄 팬의 대표 컷',
+        image: blueHazeFront,
+      },
+      {
+        label: 'Angle',
+        caption: '새벽빛처럼 맑은 블루 펄과 투명 케이스의 보조 컷',
+        image: blueHazeSupport,
+      },
+      {
+        label: 'Detail',
+        caption: '옅은 블루 펄 입자가 물빛처럼 펼쳐지는 질감 컷',
+        image: blueHazeTexture,
+      },
+    ],
+    textureImage: blueHazeTexture,
+    cardImage: subItem4,
+  },
+}
+
+const productList = Object.values(products)
+
+function findProductByPath() {
+  const slug = window.location.pathname.split('/').filter(Boolean).pop()
+  return (
+    productList.find((product) => product.slug === slug || product.aliases?.includes(slug)) ??
+    products['pearl-veil']
+  )
+}
+
+function ProductGallery({ product }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const activeItem = product.gallery[activeIndex]
+
+  return (
+    <div
+      className="group relative flex h-full min-h-[520px] flex-col overflow-hidden rounded-[6px] p-6 md:p-8"
+      style={{ background: product.shade }}
+    >
+      <div className="absolute inset-x-[18%] top-[12%] h-[58%] rounded-full bg-white/70 blur-3xl" />
+      <div
+        className="relative z-10 mb-5 flex h-[330px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] lg:h-[360px] xl:h-[390px]"
+        style={{ background: product.shade }}
+      >
+        <img
+          src={activeItem.image}
+          alt=""
+          className="absolute inset-0 h-full w-full scale-125 object-cover opacity-45 blur-2xl"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 64% 72% at 50% 50%, rgba(255,255,255,0.52) 0%, rgba(255,255,255,0.26) 48%, transparent 88%)',
+          }}
+        />
+        <img
+          src={activeItem.image}
+          alt={product.name}
+          className="relative z-10 h-full max-h-full w-full max-w-[88%] object-contain mix-blend-normal transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+        />
+      </div>
+
+      <div className="relative z-10 border-t border-[#ded5e3]/70 pt-4">
+        <p className="mb-4 min-h-[34px] font-pretendard text-[11px] font-light leading-[1.65] text-[#8c8496]">
+          {activeItem.caption}
+        </p>
+        <div className="grid grid-cols-3 gap-3">
+          {product.gallery.map((item, index) => (
+            <button
+              key={item.label}
+              type="button"
+              aria-label={`${item.label} image`}
+              onMouseEnter={() => setActiveIndex(index)}
+              onFocus={() => setActiveIndex(index)}
+              onClick={() => setActiveIndex(index)}
+              className={`flex h-[86px] items-center justify-center overflow-hidden rounded-[4px] border transition-all duration-300 ${
+                activeIndex === index
+                  ? 'border-[#bdb3c7] opacity-100'
+                  : 'border-transparent opacity-60 hover:opacity-100'
+              }`}
+              style={{ background: product.shade }}
+            >
+              <img
+                src={item.image}
+                alt=""
+                className="max-h-[76px] max-w-[82%] object-contain transition-transform duration-500 hover:scale-[1.08]"
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function InfoRow({ label, children }) {
+  return (
+    <div className="grid grid-cols-[120px_1fr] border-t border-[#ded8e5] py-5 text-[12px] leading-[1.7] text-[#5a5562]">
+      <dt className="font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
+        {label}
+      </dt>
+      <dd className="font-pretendard font-light">{children}</dd>
+    </div>
+  )
+}
+
+function ProductDetailPage() {
+  const product = useMemo(() => findProductByPath(), [])
+  const relatedItems = productList.filter((item) => item.slug !== product.slug)
+
+  return (
+    <div className="min-h-screen bg-[#fbfafc] text-[#211f24]">
+      <Header tone="light" />
+
+      <main className="mx-auto max-w-[1440px] px-5 pb-16 pt-[106px] md:px-8 lg:px-10">
+        <section id="hero" className="grid gap-10 lg:grid-cols-[52%_1fr] lg:gap-20">
+          <ProductGallery product={product} />
+
+          <div className="pt-2 lg:pt-3">
+            <div className="mb-10 flex items-start justify-between gap-8">
+              <div>
+                <h1 className="font-didot text-[32px] font-normal leading-none tracking-[0.01em] text-[#2a2630] md:text-[38px]">
+                  {product.name}
+                </h1>
+                <p className="mt-3 font-pretendard text-[12px] font-light text-[#6d6676]">
+                  {product.nameKo}
+                </p>
+                <p className="mt-4 font-pretendard text-[12px] font-light text-[#9a93a5]">
+                  {product.size}
+                </p>
+              </div>
+              <p className="font-pretendard text-[16px] font-medium text-[#2a2630]">{product.price}</p>
+            </div>
+
+            <p className="mb-4 whitespace-pre-line font-pretendard text-[12px] font-light leading-[1.7] text-[#9a93a5]">
+              {product.weeklyText}
+            </p>
+            <p className="mb-10 max-w-[520px] font-pretendard text-[13px] font-light leading-[1.75] text-[#4f4958]">
+              {product.description}
+            </p>
+
+            <div className="mb-10 flex gap-11 font-pretendard text-[12px] text-[#6d6676]">
+              {product.swatches.map((swatch, index) => (
+                <label key={swatch} className="flex items-center gap-3">
+                  <span
+                    className={`h-3 w-3 rounded-full border ${
+                      index === 0 ? 'border-[#2a2630] bg-[#2a2630]' : 'border-[#bbb2c8] bg-transparent'
+                    }`}
+                  />
+                  {swatch}
+                </label>
+              ))}
+            </div>
+
+            <div className="mb-12 grid grid-cols-2 gap-5">
+              <button className="h-[56px] rounded-[5px] bg-[#29252d] font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80">
+                Add to cart
+              </button>
+              <button className="h-[56px] rounded-[5px] border border-[#ded8e5] bg-white/55 font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]">
+                Add to wishlist
+              </button>
+            </div>
+
+            <div className="border-b border-[#ded8e5]">
+              <InfoRow label="Functions">{product.functions}</InfoRow>
+              <InfoRow label="Texture">{product.textureText}</InfoRow>
+              <InfoRow label="Delivery">주문 확인 후 영업일 기준 2-4일 이내 출고됩니다.</InfoRow>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="mt-4 grid min-h-[560px] items-center rounded-[6px] px-8 py-[72px] md:px-16 lg:grid-cols-[52%_1fr] lg:px-20"
+          style={{ background: product.shade }}
+        >
+          <div className="flex justify-center">
+            <img
+              src={product.textureImage}
+              alt={`${product.name} texture`}
+              className="w-full max-w-[560px] object-contain"
+            />
+          </div>
+
+          <dl className="max-w-[430px]">
+            <div className="pb-8">
+              <dt className="font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
+                How to use
+              </dt>
+              <dd className="mt-3 font-pretendard text-[12px] font-light leading-[1.7] text-[#6b6472]">
+                {product.howTo}
+              </dd>
+            </div>
+            <InfoRow label="Active">
+              {product.active.map((item) => (
+                <span key={item}>
+                  {item}
+                  <br />
+                </span>
+              ))}
+            </InfoRow>
+            <InfoRow label="Finish">{product.finish}</InfoRow>
+            <InfoRow label="Mood">{product.mood}</InfoRow>
+          </dl>
+        </section>
+
+        <section className="pt-24">
+          <h2 className="mb-8 font-didot text-[36px] font-normal leading-none text-[#2a2630] md:text-[44px]">
+            See also
+          </h2>
+          <div className="grid gap-2 md:grid-cols-3">
+            {relatedItems.map((item) => (
+              <a
+                key={item.slug}
+                href={`/LUNARE/product/${item.slug}#hero`}
+                className="group rounded-[6px] bg-[#f8f5fa] p-6"
+              >
+                <div
+                  className="mb-7 flex aspect-[1.05/1] items-center justify-center rounded-[4px]"
+                  style={{ background: item.shade }}
+                >
+                  <img
+                    src={item.cardImage}
+                    alt={item.name}
+                    className="h-auto max-h-[56%] w-auto max-w-[50%] object-contain transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="flex items-end justify-between gap-4">
+                  <div>
+                    <h3 className="font-pretendard text-[16px] font-light text-[#2b2730]">{item.name}</h3>
+                    <p className="mt-2 font-pretendard text-[12px] font-light text-[#8e8798]">{item.type}</p>
+                  </div>
+                  <p className="font-pretendard text-[12px] font-medium text-[#2b2730]">{item.price}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
+  )
+}
+
+export default ProductDetailPage

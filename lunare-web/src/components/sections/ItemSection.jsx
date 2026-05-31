@@ -8,7 +8,10 @@ const ITEM_IMGS = [item1, item2, item3, item4]
 
 function ItemCard({ item, img }) {
   return (
-    <div className="item-card group relative flex flex-col items-center cursor-pointer">
+    <a
+      href={`/LUNARE/product/${item.slug}#hero`}
+      className="item-card group relative flex flex-col items-center cursor-pointer"
+    >
       {/* 이미지 영역 */}
       <div
         className="relative overflow-hidden mb-6 w-full"
@@ -38,7 +41,7 @@ function ItemCard({ item, img }) {
       <p className="font-pretendard text-[11px] leading-[1.8] text-[#9a94a5] font-light text-center whitespace-pre-line">
         {item.desc}
       </p>
-    </div>
+    </a>
   )
 }
 
