@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Layout from './components/layout/Layout'
 import HeroSection from './components/sections/HeroSection'
 import Section01 from './components/sections/Section01'
@@ -7,9 +8,15 @@ import BestCollectionSection from './components/sections/BestCollectionSection'
 import ProductDetailPage from './components/pages/ProductDetailPage'
 
 function App() {
-  const isProductPage = window.location.pathname.includes('/product')
+  const [hash, setHash] = useState(window.location.hash)
 
-  if (isProductPage) {
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  if (hash.includes('#/product')) {
     return <ProductDetailPage />
   }
 

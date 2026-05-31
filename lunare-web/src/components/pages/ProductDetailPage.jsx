@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import Header from '../layout/Header'
 import subItem1 from '../../assets/images/sub/sub_item1.png'
 import subItem2 from '../../assets/images/sub/sub_item2.png'
@@ -190,7 +190,7 @@ const products = {
 const productList = Object.values(products)
 
 function findProductByPath() {
-  const slug = window.location.pathname.split('/').filter(Boolean).pop()
+  const slug = window.location.hash.replace('#/product/', '').split('/')[0]
   return (
     productList.find((product) => product.slug === slug || product.aliases?.includes(slug)) ??
     products['pearl-veil']
@@ -276,7 +276,14 @@ function InfoRow({ label, children }) {
 }
 
 function ProductDetailPage() {
-  const product = useMemo(() => findProductByPath(), [])
+  const [product, setProduct] = useState(() => findProductByPath())
+
+  useEffect(() => {
+    const onHashChange = () => setProduct(findProductByPath())
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
   const relatedItems = productList.filter((item) => item.slug !== product.slug)
 
   return (
@@ -382,7 +389,7 @@ function ProductDetailPage() {
             {relatedItems.map((item) => (
               <a
                 key={item.slug}
-                href={`/LUNARE/product/${item.slug}#hero`}
+                href={`#/product/${item.slug}`}
                 className="group rounded-[6px] bg-[#f8f5fa] p-6"
               >
                 <div

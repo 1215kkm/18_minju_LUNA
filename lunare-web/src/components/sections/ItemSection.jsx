@@ -9,7 +9,7 @@ const ITEM_IMGS = [item1, item2, item3, item4]
 function ItemCard({ item, img }) {
   return (
     <a
-      href={`/LUNARE/product/${item.slug}#hero`}
+      href={`#/product/${item.slug}`}
       className="item-card group relative flex flex-col items-center cursor-pointer"
     >
       {/* 이미지 영역 */}
