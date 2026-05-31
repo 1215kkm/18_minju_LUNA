@@ -58,12 +58,16 @@ function Header({ tone = 'auto' }) {
 
         {/* 우측 — 로그인 + 장바구니 */}
         <div className={`flex items-center gap-6 transition-colors duration-500 ${textColor}`}>
-          <button className="font-pretendard flex items-center gap-1.5 text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity">
+          <a
+            href="#/login"
+            className="font-pretendard flex items-center gap-1.5 text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity"
+            onClick={() => window.scrollTo(0, 0)}
+          >
             로그인
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
               <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
             </svg>
-          </button>
+          </a>
           <button className="font-pretendard text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity">
             장바구니
           </button>

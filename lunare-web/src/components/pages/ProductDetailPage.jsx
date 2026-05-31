@@ -355,7 +355,7 @@ function ProductDetailPage() {
             <img
               src={product.textureImage}
               alt={`${product.name} texture`}
-              className="w-full max-w-[560px] object-contain"
+              className="w-full max-w-[300px] object-contain"
             />
           </div>
 
@@ -390,6 +390,7 @@ function ProductDetailPage() {
               <a
                 key={item.slug}
                 href={`#/product/${item.slug}`}
+                onClick={() => window.scrollTo(0, 0)}
                 className="group rounded-[6px] bg-[#f8f5fa] p-6"
               >
                 <div

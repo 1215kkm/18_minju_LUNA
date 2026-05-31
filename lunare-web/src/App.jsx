@@ -6,6 +6,8 @@ import ItemSection from './components/sections/ItemSection'
 import FullTitleSection from './components/sections/FullTitleSection'
 import BestCollectionSection from './components/sections/BestCollectionSection'
 import ProductDetailPage from './components/pages/ProductDetailPage'
+import LoginPage from './components/pages/LoginPage'
+import SignupPage from './components/pages/SignupPage'
 
 function App() {
   const [hash, setHash] = useState(window.location.hash)
@@ -18,6 +20,14 @@ function App() {
 
   if (hash.includes('#/product')) {
     return <ProductDetailPage />
+  }
+
+  if (hash === '#/login') {
+    return <LoginPage />
+  }
+
+  if (hash === '#/signup') {
+    return <SignupPage />
   }
 
   return (
