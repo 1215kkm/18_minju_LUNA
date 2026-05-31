@@ -8,6 +8,7 @@ import BestCollectionSection from './components/sections/BestCollectionSection'
 import ProductDetailPage from './components/pages/ProductDetailPage'
 import LoginPage from './components/pages/LoginPage'
 import SignupPage from './components/pages/SignupPage'
+import HighlighterShopPage from './components/pages/HighlighterShopPage'
 
 function App() {
   const [hash, setHash] = useState(window.location.hash)
@@ -20,6 +21,10 @@ function App() {
 
   if (hash.includes('#/product')) {
     return <ProductDetailPage />
+  }
+
+  if (hash === '#/shop' || hash.startsWith('#/shop/')) {
+    return <HighlighterShopPage />
   }
 
   if (hash === '#/login') {

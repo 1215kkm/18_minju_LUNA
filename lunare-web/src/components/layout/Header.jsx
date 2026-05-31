@@ -48,12 +48,16 @@ function Header({ tone = 'auto' }) {
               <line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" strokeWidth="1.4"/>
             </svg>
           </button>
-          <button className="font-pretendard flex items-center gap-1.5 text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity">
+          <a
+            href="#/shop/all"
+            className="font-pretendard flex items-center gap-1.5 text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity"
+            onClick={() => window.scrollTo(0, 0)}
+          >
             SHOP
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
               <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
             </svg>
-          </button>
+          </a>
         </div>
 
         {/* 우측 — 로그인 + 장바구니 */}

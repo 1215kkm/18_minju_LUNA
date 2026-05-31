@@ -1,28 +1,68 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../layout/Header'
-import subItem1 from '../../assets/images/sub/sub_item1.png'
-import subItem2 from '../../assets/images/sub/sub_item2.png'
-import subItem3 from '../../assets/images/sub/sub_item3.png'
-import subItem4 from '../../assets/images/sub/sub_item4.png'
-import pearlVeilMain from '../../assets/images/sub/pearl-veil-main-front-soft.png'
-import pearlVeilSub from '../../assets/images/sub/pearl-veil-main-generated-soft.png'
+import moonVeilFront from '../../assets/images/shop/balm_h01.png'
+import pearlVeilMain from '../../assets/images/sub/pearl-veil-main-front_rbg.png'
+import pearlVeilSub from '../../assets/images/sub/pearl-veil-main-generated_rbg.png'
 import pearlVeilParticle from '../../assets/images/sub/pearl-veil-particle-detail.png'
-import pearlVeilTexture from '../../assets/images/sub/pearl-veil-texture.png'
-import lilacGlowFront from '../../assets/images/sub/lilac-glow-front-soft.png'
-import lilacGlowSupport from '../../assets/images/sub/lilac-glow-support-soft.png'
-import lilacGlowTexture from '../../assets/images/sub/lilac-glow-texture.png'
-import pinkAuraFront from '../../assets/images/sub/pink-aura-front-soft.png'
-import pinkAuraSupport from '../../assets/images/sub/pink-aura-support-soft.png'
-import pinkAuraParticle from '../../assets/images/sub/pink-aura-particle-detail.png'
-import pinkAuraTexture from '../../assets/images/sub/pink-aura-texture.png'
-import blueHazeFront from '../../assets/images/sub/blue-haze-front-soft.png'
-import blueHazeSupport from '../../assets/images/sub/blue-haze-support-soft.png'
-import blueHazeTexture from '../../assets/images/sub/blue-haze-texture.png'
+import pearlVeilTexture from '../../assets/images/sub/pearl-veil-texture_rbg.png'
+import lilacGlowFront from '../../assets/images/sub/lilac-glow-front_rbg.png'
+import lilacGlowSupport from '../../assets/images/sub/lilac-glow-support_rbg.png'
+import lilacGlowParticle from '../../assets/images/sub/lilac-glow-particle-detail.png'
+import lilacGlowTexture from '../../assets/images/sub/lilac-glow-texture_rbg.png'
+import pinkAuraFront from '../../assets/images/sub/pink-aura-front_rbg.png'
+import pinkAuraSupport from '../../assets/images/sub/pink-aura-support_rbg.png'
+import pinkAuraParticle from '../../assets/images/sub/pink-aura-particle-detail-rbg.png'
+import pinkAuraTexture from '../../assets/images/sub/pink-aura-texture_rbg.png'
+import blueHazeFront from '../../assets/images/sub/blue-haze-front_rbg.png'
+import blueHazeSupport from '../../assets/images/sub/blue-haze-support_rbg.png'
+import blueHazeParticle from '../../assets/images/sub/blue-haze-particle-detail-rbg.png'
+import blueHazeTexture from '../../assets/images/sub/blue-haze-texture_rbg.png'
 
 const products = {
+  'moon-veil': {
+    slug: 'moon-veil',
+    name: 'Moon Veil',
+    nameKo: '문 베일',
+    weeklyText: '달빛이 부드럽게\n피부 위에 머무는 순간',
+    price: '$21',
+    size: '6.5 g / 0.22 oz',
+    shade: '#F0EDF5',
+    type: 'Highlighter balm',
+    swatches: ['01 Moon', '02 Pearl'],
+    description:
+      '달빛이 부드럽게 피부 위에 머무는 순간. 투명한 아이보리 펄과 은은한 샴페인 광채가 맑게 겹쳐지는 하이라이터 밤입니다.',
+    functions:
+      '광대, 콧대, 눈 앞머리, 입술산에 조용한 달빛 광을 더해 피부 결을 맑고 입체적으로 밝혀줍니다.',
+    textureText:
+      '투명하게 녹는 밤 텍스쳐가 얇게 밀착되어 끈적임 없이 촉촉한 윤기를 남깁니다.',
+    howTo:
+      '얼굴의 높은 부위에 가볍게 톡톡 얹은 뒤 손끝으로 부드럽게 블렌딩합니다. 더 선명한 광채를 원할 때는 얇게 한 번 더 레이어링하세요.',
+    active: ['문스톤 파우더', '샴페인 펄 콤플렉스', '스쿠알란', '화이트 플라워 추출물'],
+    finish: '은은하게 맑아지는 문라이트 글로우',
+    mood: '차분한 달빛, 투명한 케이스, 깨끗한 아이보리 펄',
+    gallery: [
+      {
+        label: 'Main',
+        caption: '정면에서 바라본 투명 케이스와 아이보리 펄 팬의 대표 컷',
+        image: moonVeilFront,
+      },
+      {
+        label: 'Angle',
+        caption: '달빛처럼 맑은 아이보리 펄과 투명 케이스의 입체감',
+        image: pearlVeilSub,
+      },
+      {
+        label: 'Detail',
+        caption: '고운 샴페인 펄 입자와 촉촉한 소프트 글로우 텍스쳐',
+        image: pearlVeilParticle,
+      },
+    ],
+    textureImage: pearlVeilTexture,
+    textureImageClass: 'max-w-[440px] lg:max-w-[500px]',
+    cardImage: moonVeilFront,
+  },
   'pearl-veil': {
     slug: 'pearl-veil',
-    aliases: ['moon-veil'],
     name: 'Pearl Veil',
     nameKo: '펄 베일',
     weeklyText: '달빛이 가장 먼저\n피부에 내려앉는 순간',
@@ -60,7 +100,9 @@ const products = {
       },
     ],
     textureImage: pearlVeilTexture,
-    cardImage: subItem1,
+    textureImageClass: 'max-w-[440px] lg:max-w-[500px]',
+    cardImage: pearlVeilMain,
+    relatedImageClass: 'scale-[1.12]',
   },
   'lilac-glow': {
     slug: 'lilac-glow',
@@ -97,11 +139,12 @@ const products = {
       {
         label: 'Detail',
         caption: '고운 라일락 펄 입자가 부드럽게 펼쳐지는 질감 컷',
-        image: lilacGlowTexture,
+        image: lilacGlowParticle,
       },
     ],
     textureImage: lilacGlowTexture,
-    cardImage: subItem2,
+    textureImageClass: 'max-w-[300px]',
+    cardImage: lilacGlowFront,
   },
   'pink-aura': {
     slug: 'pink-aura',
@@ -142,7 +185,8 @@ const products = {
       },
     ],
     textureImage: pinkAuraTexture,
-    cardImage: subItem3,
+    textureImageClass: 'max-w-[300px]',
+    cardImage: pinkAuraFront,
   },
   'blue-haze': {
     slug: 'blue-haze',
@@ -179,15 +223,26 @@ const products = {
       {
         label: 'Detail',
         caption: '옅은 블루 펄 입자가 물빛처럼 펼쳐지는 질감 컷',
-        image: blueHazeTexture,
+        image: blueHazeParticle,
       },
     ],
     textureImage: blueHazeTexture,
-    cardImage: subItem4,
+    textureImageClass: 'max-w-[300px]',
+    cardImage: blueHazeFront,
   },
 }
 
 const productList = Object.values(products)
+const newItemSlugs = ['pearl-veil', 'lilac-glow', 'pink-aura', 'blue-haze']
+const detailSurface = '#f7f4f8'
+const detailSurfaceLight = '#fbfafc'
+const textureSectionBackgrounds = {
+  'moon-veil': '#f7f4f8',
+  'pearl-veil': '#f7f4f8',
+  'lilac-glow': '#f6f3fa',
+  'pink-aura': '#faf4f7',
+  'blue-haze': '#f4f7fa',
+}
 
 function findProductByPath() {
   const slug = window.location.hash.replace('#/product/', '').split('/')[0]
@@ -200,39 +255,28 @@ function findProductByPath() {
 function ProductGallery({ product }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const activeItem = product.gallery[activeIndex]
+  const isDetailCut = activeItem.label === 'Detail'
 
   return (
     <div
-      className="group relative flex h-full min-h-[520px] flex-col overflow-hidden rounded-[6px] p-6 md:p-8"
-      style={{ background: product.shade }}
+      className="group relative mx-auto flex w-full max-w-[620px] flex-col overflow-hidden rounded-[6px] p-5 md:p-6 lg:mx-0"
+      style={{ background: detailSurface }}
     >
-      <div className="absolute inset-x-[18%] top-[12%] h-[58%] rounded-full bg-white/70 blur-3xl" />
       <div
-        className="relative z-10 mb-5 flex h-[330px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] lg:h-[360px] xl:h-[390px]"
-        style={{ background: product.shade }}
+        className="relative z-10 mb-4 flex h-[300px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] lg:h-[335px] xl:h-[360px]"
+        style={{ background: detailSurface }}
       >
         <img
           src={activeItem.image}
-          alt=""
-          className="absolute inset-0 h-full w-full scale-125 object-cover opacity-45 blur-2xl"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 64% 72% at 50% 50%, rgba(255,255,255,0.52) 0%, rgba(255,255,255,0.26) 48%, transparent 88%)',
-          }}
-        />
-        <img
-          src={activeItem.image}
           alt={product.name}
-          className="relative z-10 h-full max-h-full w-full max-w-[88%] object-contain mix-blend-normal transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+          className={`relative z-10 h-full w-full mix-blend-normal transition-transform duration-700 ease-out group-hover:scale-[1.035] ${
+            isDetailCut ? 'object-cover' : 'max-h-full max-w-full object-contain'
+          }`}
         />
       </div>
 
-      <div className="relative z-10 border-t border-[#ded5e3]/70 pt-4">
-        <p className="mb-4 min-h-[34px] font-pretendard text-[11px] font-light leading-[1.65] text-[#8c8496]">
+      <div className="relative z-10 border-t border-[#ded5e3]/70 pt-3">
+        <p className="mb-2 font-pretendard text-[10px] font-light leading-[1.55] text-[#8c8496]">
           {activeItem.caption}
         </p>
         <div className="grid grid-cols-3 gap-3">
@@ -244,17 +288,21 @@ function ProductGallery({ product }) {
               onMouseEnter={() => setActiveIndex(index)}
               onFocus={() => setActiveIndex(index)}
               onClick={() => setActiveIndex(index)}
-              className={`flex h-[86px] items-center justify-center overflow-hidden rounded-[4px] border transition-all duration-300 ${
+              className={`flex aspect-square items-center justify-center overflow-hidden rounded-[4px] border transition-all duration-300 ${
                 activeIndex === index
-                  ? 'border-[#bdb3c7] opacity-100'
+                  ? 'border-[#d8d2dd] opacity-100'
                   : 'border-transparent opacity-60 hover:opacity-100'
               }`}
-              style={{ background: product.shade }}
+              style={{ background: item.label === 'Detail' ? 'transparent' : detailSurfaceLight }}
             >
               <img
                 src={item.image}
                 alt=""
-                className="max-h-[76px] max-w-[82%] object-contain transition-transform duration-500 hover:scale-[1.08]"
+                className={`transition-transform duration-500 hover:scale-[1.08] ${
+                  item.label === 'Detail'
+                    ? 'h-full w-full object-cover'
+                    : 'max-h-[72%] max-w-[74%] object-contain'
+                }`}
               />
             </button>
           ))}
@@ -266,7 +314,7 @@ function ProductGallery({ product }) {
 
 function InfoRow({ label, children }) {
   return (
-    <div className="grid grid-cols-[120px_1fr] border-t border-[#ded8e5] py-5 text-[12px] leading-[1.7] text-[#5a5562]">
+    <div className="grid grid-cols-[112px_1fr] border-t border-[#ded8e5] py-3.5 text-[11px] leading-[1.65] text-[#5a5562]">
       <dt className="font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
         {label}
       </dt>
@@ -284,40 +332,45 @@ function ProductDetailPage() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
-  const relatedItems = productList.filter((item) => item.slug !== product.slug)
+  const relatedItems = newItemSlugs
+    .map((slug) => products[slug])
+    .filter((item) => item.slug !== product.slug)
 
   return (
     <div className="min-h-screen bg-[#fbfafc] text-[#211f24]">
       <Header tone="light" />
 
-      <main className="mx-auto max-w-[1440px] px-5 pb-16 pt-[106px] md:px-8 lg:px-10">
-        <section id="hero" className="grid gap-10 lg:grid-cols-[52%_1fr] lg:gap-20">
+      <main className="mx-auto w-full max-w-[1440px] px-5 pb-16 pt-[88px] md:px-8 xl:px-0">
+        <section
+          id="hero"
+          className="mx-auto grid min-h-[calc(100vh-88px)] max-w-[1280px] items-center gap-8 pb-20 lg:grid-cols-[minmax(0,620px)_minmax(430px,560px)] lg:justify-center lg:gap-14"
+        >
           <ProductGallery product={product} />
 
-          <div className="pt-2 lg:pt-3">
-            <div className="mb-10 flex items-start justify-between gap-8">
+          <div className="w-full max-w-[560px] pt-1">
+            <div className="mb-7 flex items-start justify-between gap-8">
               <div>
-                <h1 className="font-didot text-[32px] font-normal leading-none tracking-[0.01em] text-[#2a2630] md:text-[38px]">
+                <h1 className="font-didot text-[32px] font-normal leading-none tracking-[0.01em] text-[#2a2630] md:text-[36px]">
                   {product.name}
                 </h1>
-                <p className="mt-3 font-pretendard text-[12px] font-light text-[#6d6676]">
+                <p className="mt-2.5 font-pretendard text-[11px] font-light text-[#6d6676]">
                   {product.nameKo}
                 </p>
-                <p className="mt-4 font-pretendard text-[12px] font-light text-[#9a93a5]">
+                <p className="mt-3 font-pretendard text-[11px] font-light text-[#9a93a5]">
                   {product.size}
                 </p>
               </div>
               <p className="font-pretendard text-[16px] font-medium text-[#2a2630]">{product.price}</p>
             </div>
 
-            <p className="mb-4 whitespace-pre-line font-pretendard text-[12px] font-light leading-[1.7] text-[#9a93a5]">
+            <p className="mb-3 whitespace-pre-line font-pretendard text-[11px] font-light leading-[1.6] text-[#9a93a5]">
               {product.weeklyText}
             </p>
-            <p className="mb-10 max-w-[520px] font-pretendard text-[13px] font-light leading-[1.75] text-[#4f4958]">
+            <p className="mb-7 max-w-[560px] font-pretendard text-[12px] font-light leading-[1.7] text-[#4f4958]">
               {product.description}
             </p>
 
-            <div className="mb-10 flex gap-11 font-pretendard text-[12px] text-[#6d6676]">
+            <div className="mb-7 flex gap-11 font-pretendard text-[11px] text-[#6d6676]">
               {product.swatches.map((swatch, index) => (
                 <label key={swatch} className="flex items-center gap-3">
                   <span
@@ -330,11 +383,11 @@ function ProductDetailPage() {
               ))}
             </div>
 
-            <div className="mb-12 grid grid-cols-2 gap-5">
-              <button className="h-[56px] rounded-[5px] bg-[#29252d] font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80">
+            <div className="mb-7 grid grid-cols-2 gap-4">
+              <button className="h-[48px] rounded-[5px] bg-[#29252d] font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80">
                 Add to cart
               </button>
-              <button className="h-[56px] rounded-[5px] border border-[#ded8e5] bg-white/55 font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]">
+              <button className="h-[48px] rounded-[5px] border border-[#ded8e5] bg-white/55 font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]">
                 Add to wishlist
               </button>
             </div>
@@ -348,18 +401,18 @@ function ProductDetailPage() {
         </section>
 
         <section
-          className="mt-4 grid min-h-[560px] items-center rounded-[6px] px-8 py-[72px] md:px-16 lg:grid-cols-[52%_1fr] lg:px-20"
-          style={{ background: product.shade }}
+          className="mx-auto mt-12 grid max-w-[1240px] items-center gap-10 px-0 py-12 md:px-6 lg:min-h-[400px] lg:grid-cols-[minmax(360px,520px)_minmax(420px,560px)] lg:justify-center lg:gap-16 lg:px-10"
+          style={{ background: textureSectionBackgrounds[product.slug] ?? detailSurface }}
         >
           <div className="flex justify-center">
             <img
               src={product.textureImage}
               alt={`${product.name} texture`}
-              className="w-full max-w-[300px] object-contain"
+              className={`w-full object-contain ${product.textureImageClass}`}
             />
           </div>
 
-          <dl className="max-w-[430px]">
+          <dl className="w-full max-w-[560px]">
             <div className="pb-8">
               <dt className="font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
                 How to use
@@ -381,34 +434,36 @@ function ProductDetailPage() {
           </dl>
         </section>
 
-        <section className="pt-24">
-          <h2 className="mb-8 font-didot text-[36px] font-normal leading-none text-[#2a2630] md:text-[44px]">
+        <section className="mx-auto max-w-[1120px] pt-14">
+          <h2 className="mb-3 font-didot text-[26px] font-normal leading-none text-[#2a2630] md:text-[30px]">
             See also
           </h2>
-          <div className="grid gap-2 md:grid-cols-3">
+          <div className="grid gap-x-7 gap-y-8 md:grid-cols-3">
             {relatedItems.map((item) => (
               <a
                 key={item.slug}
                 href={`#/product/${item.slug}`}
                 onClick={() => window.scrollTo(0, 0)}
-                className="group rounded-[6px] bg-[#f8f5fa] p-6"
+                className="group"
               >
                 <div
-                  className="mb-7 flex aspect-[1.05/1] items-center justify-center rounded-[4px]"
-                  style={{ background: item.shade }}
+                  className="mb-3 flex h-[150px] items-center justify-center"
+                  style={{ background: detailSurfaceLight }}
                 >
                   <img
                     src={item.cardImage}
                     alt={item.name}
-                    className="h-auto max-h-[56%] w-auto max-w-[50%] object-contain transition-transform duration-700 group-hover:scale-[1.04]"
+                    className={`h-auto max-h-[76%] w-auto max-w-[46%] object-contain transition-transform duration-700 group-hover:scale-[1.04] ${
+                      item.relatedImageClass ?? ''
+                    }`}
                   />
                 </div>
                 <div className="flex items-end justify-between gap-4">
                   <div>
-                    <h3 className="font-pretendard text-[16px] font-light text-[#2b2730]">{item.name}</h3>
-                    <p className="mt-2 font-pretendard text-[12px] font-light text-[#8e8798]">{item.type}</p>
+                    <h3 className="font-pretendard text-[14px] font-light text-[#2b2730]">{item.name}</h3>
+                    <p className="mt-1.5 font-pretendard text-[11px] font-light text-[#8e8798]">{item.type}</p>
                   </div>
-                  <p className="font-pretendard text-[12px] font-medium text-[#2b2730]">{item.price}</p>
+                  <p className="font-pretendard text-[11px] font-medium text-[#2b2730]">{item.price}</p>
                 </div>
               </a>
             ))}

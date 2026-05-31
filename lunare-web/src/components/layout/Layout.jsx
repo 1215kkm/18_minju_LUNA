@@ -4,7 +4,6 @@ import Header from './Header'
 import Footer from './Footer'
 
 const SNAP_DOWN = 0.60
-const SNAP_UP   = 0.80
 
 function Layout({ children }) {
   const containerRef = useRef(null)
