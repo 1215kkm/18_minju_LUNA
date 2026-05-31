@@ -15,7 +15,7 @@ function ItemCard({ item, img }) {
       {/* 이미지 영역 */}
       <div
         className="relative overflow-hidden mb-6 w-full"
-        style={{ background: item.shade, aspectRatio: '1/1' }}
+        style={{ aspectRatio: '1/1' }}
       >
         <img
           src={img}

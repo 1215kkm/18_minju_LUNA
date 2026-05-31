@@ -6,9 +6,9 @@ const DARK_SECTIONS = ['hero', 'beauty']
 
 const mainMenuItems = [
   { label: 'Brand Story', sub: 'LUNARE mood', href: '#/brand' },
-  { label: 'Shop All', sub: 'Highlighter collection', href: '#/shop/all' },
-  { label: 'New In', sub: 'Soft glow shades', href: '#/shop/new' },
-  { label: 'Best Sellers', sub: 'Most loved light', href: '#/shop/best-sellers' },
+  { label: 'About', sub: 'Who we are', href: '#/about' },
+  { label: 'Ingredient', sub: 'What goes in', href: '#/ingredient' },
+  { label: 'Contact', sub: 'Get in touch', href: '#/contact' },
 ]
 
 const shopMenuItems = [
