@@ -168,9 +168,13 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
           >
             로그인
           </a>
-          <button className="font-pretendard text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity">
+          <a
+            href="#/cart"
+            className="font-pretendard text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity"
+            onClick={closeMenus}
+          >
             장바구니
-          </button>
+          </a>
         </div>
 
       </div>
