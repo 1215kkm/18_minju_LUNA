@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
-import pearlVeilFront from '../../assets/images/sub/pearl-veil-main-front_rbg.png'
-import lilacGlowFront from '../../assets/images/sub/lilac-glow-front_rbg.png'
-import blueHazeFront from '../../assets/images/sub/blue-haze-front_rbg.png'
+import pearlVeilFront from '../../assets/images/sub/pearl-veil-main-front_rbg.webp'
+import lilacGlowFront from '../../assets/images/sub/lilac-glow-front_rbg.webp'
+import blueHazeFront from '../../assets/images/sub/blue-haze-front_rbg.webp'
 
 const initialItems = [
   {

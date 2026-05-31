@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import smallLogo from '../../assets/images/main/small_logo.png'
-import heroLeft from '../../assets/images/main/hero_left.png'
+import smallLogo from '../../assets/images/main/small_logo.webp'
+import heroLeft from '../../assets/images/main/hero_left.webp'
 
 function LoginPage() {
   const [email, setEmail] = useState('')

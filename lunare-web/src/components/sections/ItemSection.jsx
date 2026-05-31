@@ -1,8 +1,8 @@
 import { ITEMS } from '../../constants'
-import item1 from '../../assets/images/main/item_1.png'
-import item2 from '../../assets/images/main/item_2.png'
-import item3 from '../../assets/images/main/item_3.png'
-import item4 from '../../assets/images/main/item_4.png'
+import item1 from '../../assets/images/main/item_1.webp'
+import item2 from '../../assets/images/main/item_2.webp'
+import item3 from '../../assets/images/main/item_3.webp'
+import item4 from '../../assets/images/main/item_4.webp'
 
 const ITEM_IMGS = [item1, item2, item3, item4]
 

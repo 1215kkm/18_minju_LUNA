@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import smallLogo from '../../assets/images/main/small_logo.png'
-import heroRight from '../../assets/images/main/hero_right.png'
+import smallLogo from '../../assets/images/main/small_logo.webp'
+import heroRight from '../../assets/images/main/hero_right.webp'
 
 function SignupPage() {
   const [form, setForm] = useState({

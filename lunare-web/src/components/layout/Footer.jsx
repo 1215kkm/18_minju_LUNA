@@ -1,5 +1,5 @@
 import { FOOTER_LINKS } from '../../constants'
-import smallLogo from '../../assets/images/main/small_logo.png'
+import smallLogo from '../../assets/images/main/small_logo.webp'
 
 function Footer({ compact = false }) {
   if (compact) {

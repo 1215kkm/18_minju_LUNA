@@ -1,6 +1,6 @@
 import { useAutoSlide } from '../../hooks/useAutoSlide'
-import right1 from '../../assets/images/main/section01_right1.png'
-import right2 from '../../assets/images/main/section01_right2.png'
+import right1 from '../../assets/images/main/section01_right1.webp'
+import right2 from '../../assets/images/main/section01_right2.webp'
 
 const SLIDES = [right1, right2]
 

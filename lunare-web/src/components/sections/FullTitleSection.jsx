@@ -1,6 +1,6 @@
 import { useAutoSlide } from '../../hooks/useAutoSlide'
-import fullImg1 from '../../assets/images/main/full_img01.png'
-import fullImg2 from '../../assets/images/main/full_img02.png'
+import fullImg1 from '../../assets/images/main/full_img01.webp'
+import fullImg2 from '../../assets/images/main/full_img02.webp'
 
 const SLIDES = [fullImg1, fullImg2]
 

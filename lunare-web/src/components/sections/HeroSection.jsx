@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import logoImg from '../../assets/images/main/logo_img.png'
-import heroLeft from '../../assets/images/main/hero_left.png'
-import heroRight from '../../assets/images/main/hero_right.png'
+import logoImg from '../../assets/images/main/logo_img.webp'
+import heroLeft from '../../assets/images/main/hero_left.webp'
+import heroRight from '../../assets/images/main/hero_right.webp'
 
 function HeroSection() {
   const logoWrapRef = useRef(null)

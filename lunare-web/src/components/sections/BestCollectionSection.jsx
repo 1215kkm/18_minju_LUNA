@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { BEST_COLLECTION } from '../../constants'
-import detail1 from '../../assets/images/main/detail_01.png'
-import detail2 from '../../assets/images/main/detail_02.png'
-import detail3 from '../../assets/images/main/detail_03.png'
-import detail4 from '../../assets/images/main/detail_04.png'
+import detail1 from '../../assets/images/main/detail_01.webp'
+import detail2 from '../../assets/images/main/detail_02.webp'
+import detail3 from '../../assets/images/main/detail_03.webp'
+import detail4 from '../../assets/images/main/detail_04.webp'
 
 const DETAIL_IMGS = [detail1, detail2, detail3, detail4]
 

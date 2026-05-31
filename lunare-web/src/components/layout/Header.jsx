@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import smallLogo from '../../assets/images/main/small_logo.png'
+import smallLogo from '../../assets/images/main/small_logo.webp'
 
 // 이미지(dark) 위 섹션 id 목록
 const DARK_SECTIONS = ['hero', 'beauty']

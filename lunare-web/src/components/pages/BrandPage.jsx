@@ -1,7 +1,7 @@
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
-import brandImg from '../../assets/images/brand/brand_img.png'
-import brandBg from '../../assets/images/brand/brand_bg.png'
+import brandImg from '../../assets/images/brand/brand_img.webp'
+import brandBg from '../../assets/images/brand/brand_bg.webp'
 
 const bodyBlocks = [
   `우리는 화려한 글리터나 과장된 광채가 아닌,
