@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
 import pearlVeilFront from '../../assets/images/sub/pearl-veil-main-front_rbg.png'
@@ -39,9 +39,33 @@ const initialItems = [
   },
 ]
 
+const MAX_QUANTITY = 99
+
 const formatPrice = (value) => `${value.toLocaleString('ko-KR')}원`
 
-function QuantityControl({ value, onDecrease, onIncrease }) {
+function UndoToast({ item, onUndo, onDismiss }) {
+  useEffect(() => {
+    const timer = setTimeout(onDismiss, 4000)
+    return () => clearTimeout(timer)
+  }, [onDismiss])
+
+  return (
+    <div className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-[6px] bg-[#2a2630] px-5 py-3 shadow-lg">
+      <p className="font-pretendard text-[11px] font-light text-white/80">
+        <span className="font-medium text-white">{item.name}</span>을(를) 삭제했습니다.
+      </p>
+      <button
+        type="button"
+        onClick={onUndo}
+        className="font-pretendard text-[10px] font-medium uppercase tracking-[0.1em] text-[#c8b8d8] transition-opacity hover:opacity-70"
+      >
+        되돌리기
+      </button>
+    </div>
+  )
+}
+
+function QuantityControl({ value, onDecrease, onIncrease, atMax }) {
   return (
     <div className="grid h-9 w-[104px] grid-cols-3 overflow-hidden rounded-[5px] border border-[#ded8e5] bg-white/60">
       <button
@@ -58,7 +82,8 @@ function QuantityControl({ value, onDecrease, onIncrease }) {
       <button
         type="button"
         aria-label="Increase quantity"
-        className="relative flex items-center justify-center text-[#6d6676] transition-colors hover:bg-[#f4f0f8]"
+        disabled={atMax}
+        className="relative flex items-center justify-center text-[#6d6676] transition-colors hover:bg-[#f4f0f8] disabled:cursor-not-allowed disabled:opacity-30"
         onClick={onIncrease}
       >
         <span className="absolute h-px w-2.5 bg-current" />
@@ -93,9 +118,16 @@ function CartItem({ item, onDecrease, onIncrease, onRemove }) {
             </a>
             <p className="mt-2 font-pretendard text-[11px] font-light text-[#8d8596]">{item.nameKo}</p>
           </div>
-          <p className="font-pretendard text-[13px] font-medium text-[#2a2630] md:hidden">
-            {formatPrice(item.price * item.quantity)}
-          </p>
+          <div className="text-right md:hidden">
+            <p className="font-pretendard text-[13px] font-medium text-[#2a2630]">
+              {formatPrice(item.price * item.quantity)}
+            </p>
+            {item.quantity > 1 && (
+              <p className="mt-1 font-pretendard text-[10px] font-light text-[#aaa3b1]">
+                개당 {formatPrice(item.price)}
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="mt-5 flex flex-wrap gap-x-3 gap-y-2 font-pretendard text-[11px] font-light text-[#6d6676]">
@@ -110,7 +142,12 @@ function CartItem({ item, onDecrease, onIncrease, onRemove }) {
         </div>
 
         <div className="mt-5 flex items-center gap-5">
-          <QuantityControl value={item.quantity} onDecrease={onDecrease} onIncrease={onIncrease} />
+          <QuantityControl
+            value={item.quantity}
+            onDecrease={onDecrease}
+            onIncrease={onIncrease}
+            atMax={item.quantity >= MAX_QUANTITY}
+          />
           <button
             type="button"
             className="rounded-[5px] border border-[#ded8e5] px-4 py-2 font-pretendard text-[10px] font-light tracking-[0.08em] text-[#6d6676] transition-colors hover:border-[#9a93a5] hover:text-[#2a2630]"
@@ -158,6 +195,8 @@ function EmptyCart() {
 function CartPage() {
   const [items, setItems] = useState(initialItems)
   const [giftWrap, setGiftWrap] = useState(false)
+  const [undoTarget, setUndoTarget] = useState(null)
+  const undoRef = useRef(null)
 
   const subtotal = useMemo(
     () => items.reduce((total, item) => total + item.price * item.quantity, 0),
@@ -170,15 +209,36 @@ function CartPage() {
     setItems((currentItems) =>
       currentItems.map((item) => {
         if (item.id !== id) return item
-        const nextQuantity = direction === 'increase' ? item.quantity + 1 : Math.max(1, item.quantity - 1)
-        return { ...item, quantity: nextQuantity }
+        if (direction === 'increase') {
+          return { ...item, quantity: Math.min(MAX_QUANTITY, item.quantity + 1) }
+        }
+        const next = item.quantity - 1
+        if (next < 1) return item
+        return { ...item, quantity: next }
       })
     )
   }
 
   const removeItem = (id) => {
-    setItems((currentItems) => currentItems.filter((item) => item.id !== id))
+    setItems((currentItems) => {
+      const target = currentItems.find((item) => item.id === id)
+      if (!target) return currentItems
+      setUndoTarget({ item: target, index: currentItems.indexOf(target) })
+      return currentItems.filter((item) => item.id !== id)
+    })
   }
+
+  const handleUndo = () => {
+    if (!undoTarget) return
+    setItems((currentItems) => {
+      const next = [...currentItems]
+      next.splice(undoTarget.index, 0, undoTarget.item)
+      return next
+    })
+    setUndoTarget(null)
+  }
+
+  const dismissUndo = () => setUndoTarget(null)
 
   return (
     <div className="min-h-screen bg-[#fbfafc] text-[#211f24]">
@@ -238,6 +298,10 @@ function CartPage() {
                       <span>{formatPrice(subtotal)}</span>
                     </p>
                     <p className="flex justify-between border-b border-[#e8e2ec] py-4">
+                      <span>배송비</span>
+                      <span className="text-[#7a6f85]">무료</span>
+                    </p>
+                    <p className="flex justify-between border-b border-[#e8e2ec] py-4">
                       <span>선물 포장</span>
                       <span>{giftWrap ? formatPrice(giftWrapFee) : '0원'}</span>
                     </p>
@@ -248,12 +312,28 @@ function CartPage() {
                       선물 포장 추가
                       <span className="mt-1 block text-[10px] text-[#aaa3b1]">Soft pearl pouch · 3,000원</span>
                     </span>
-                    <input
-                      type="checkbox"
-                      checked={giftWrap}
-                      onChange={(event) => setGiftWrap(event.target.checked)}
-                      className="h-4 w-4 accent-[#2a2630]"
-                    />
+                    <span className="relative inline-flex h-4 w-4 shrink-0 items-center justify-center">
+                      <input
+                        type="checkbox"
+                        checked={giftWrap}
+                        onChange={(event) => setGiftWrap(event.target.checked)}
+                        className="peer sr-only"
+                      />
+                      <span className="absolute inset-0 rounded-[3px] border border-[#ded8e5] bg-white transition-colors peer-checked:border-[#2a2630] peer-checked:bg-[#2a2630]" />
+                      {giftWrap && (
+                        <svg
+                          className="relative z-10 h-2.5 w-2.5 text-white"
+                          viewBox="0 0 10 8"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M1 4l2.5 2.5L9 1" />
+                        </svg>
+                      )}
+                    </span>
                   </label>
 
                   <div className="mt-5">
@@ -282,7 +362,7 @@ function CartPage() {
 
                   <button
                     type="button"
-                    className="mt-6 h-[48px] w-full rounded-[5px] bg-[#29252d] font-pretendard text-[10px] font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-82"
+                    className="mt-6 h-[48px] w-full rounded-[5px] bg-[#29252d] font-pretendard text-[10px] font-medium uppercase tracking-[0.1em] text-white transition-opacity hover:opacity-80"
                   >
                     Checkout
                   </button>
@@ -298,6 +378,10 @@ function CartPage() {
       </main>
 
       <Footer compact />
+
+      {undoTarget && (
+        <UndoToast item={undoTarget.item} onUndo={handleUndo} onDismiss={dismissUndo} />
+      )}
     </div>
   )
 }

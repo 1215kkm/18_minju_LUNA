@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
 import moonVeilFront from '../../assets/images/shop/balm_h01.png'
@@ -255,13 +255,29 @@ function findProductByPath() {
 
 function ProductGallery({ product }) {
   const [activeIndex, setActiveIndex] = useState(0)
+  const paused = useRef(false)
   const activeItem = product.gallery[activeIndex]
   const isDetailCut = activeItem.label === 'Detail'
+
+  useEffect(() => {
+    setActiveIndex(0)
+  }, [product.slug])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!paused.current) {
+        setActiveIndex((prev) => (prev + 1) % product.gallery.length)
+      }
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [product.gallery.length])
 
   return (
     <div
       className="group relative mx-auto flex w-full max-w-[620px] flex-col overflow-hidden rounded-[6px] p-5 md:p-6 lg:mx-0"
       style={{ background: detailSurface }}
+      onMouseEnter={() => { paused.current = true }}
+      onMouseLeave={() => { paused.current = false }}
     >
       <div
         className="relative z-10 mb-4 flex h-[300px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] lg:h-[335px] xl:h-[360px]"
@@ -286,7 +302,6 @@ function ProductGallery({ product }) {
               key={item.label}
               type="button"
               aria-label={`${item.label} image`}
-              onMouseEnter={() => setActiveIndex(index)}
               onFocus={() => setActiveIndex(index)}
               onClick={() => setActiveIndex(index)}
               className={`flex aspect-square items-center justify-center overflow-hidden rounded-[4px] border transition-all duration-300 ${
