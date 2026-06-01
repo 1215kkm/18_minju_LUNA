@@ -1,11 +1,39 @@
-import { useAutoSlide } from '../../hooks/useAutoSlide'
+import { useState, useEffect, useRef } from 'react'
 import right1 from '../../assets/images/main/section01_right1.webp'
 import right2 from '../../assets/images/main/section01_right2.webp'
 
 const SLIDES = [right1, right2]
+// 마지막에 첫 슬라이드 클론 추가 → 항상 왼쪽으로만 이동
+const LOOP_SLIDES = [...SLIDES, SLIDES[0]]
 
 function Section01() {
-  const { current } = useAutoSlide(SLIDES.length, 3500)
+  const [index, setIndex] = useState(0)
+  const [animated, setAnimated] = useState(true)
+  const realIndex = index % SLIDES.length
+  const timerRef = useRef(null)
+
+  const advance = () => {
+    setAnimated(true)
+    setIndex((prev) => prev + 1)
+  }
+
+  useEffect(() => {
+    timerRef.current = setInterval(advance, 3500)
+    return () => clearInterval(timerRef.current)
+  }, [])
+
+  // 클론(마지막)에 도달하면 트랜지션 없이 진짜 첫 슬라이드로 순간 이동
+  useEffect(() => {
+    if (index === LOOP_SLIDES.length - 1) {
+      const id = setTimeout(() => {
+        setAnimated(false)
+        setIndex(0)
+      }, 700)
+      return () => clearTimeout(id)
+    }
+  }, [index])
+
+  const pct = 100 / LOOP_SLIDES.length
 
   return (
     <section
@@ -26,16 +54,20 @@ function Section01() {
       {/* 우측 이미지 슬라이더 */}
       <div className="hidden md:block w-1/2 h-full relative overflow-hidden">
         <div
-          className="flex h-full transition-transform duration-700 ease-in-out"
-          style={{ width: `${SLIDES.length * 100}%`, transform: `translateX(-${current * (100 / SLIDES.length)}%)` }}
+          className="flex h-full"
+          style={{
+            width: `${LOOP_SLIDES.length * 100}%`,
+            transform: `translateX(-${index * pct}%)`,
+            transition: animated ? 'transform 700ms ease-in-out' : 'none',
+          }}
         >
-          {SLIDES.map((src, i) => (
+          {LOOP_SLIDES.map((src, i) => (
             <img
               key={i}
               src={src}
               alt=""
               className="h-full object-cover object-center"
-              style={{ width: `${100 / SLIDES.length}%` }}
+              style={{ width: `${pct}%` }}
             />
           ))}
         </div>
@@ -45,7 +77,7 @@ function Section01() {
             <span
               key={i}
               className={`block rounded-full transition-all duration-500 ${
-                i === current ? 'w-6 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/40'
+                i === realIndex ? 'w-6 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/40'
               }`}
             />
           ))}
