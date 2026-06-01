@@ -15,6 +15,8 @@ function FullTitleSection() {
           key={i}
           src={src}
           alt=""
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000"
           style={{ opacity: i === current ? 1 : 0 }}
         />

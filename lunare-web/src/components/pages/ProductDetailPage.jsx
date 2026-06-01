@@ -25,7 +25,7 @@ const products = {
     name: 'Moon Veil',
     nameKo: '문 베일',
     weeklyText: '달빛이 부드럽게\n피부 위에 머무는 순간',
-    price: '$21',
+    price: '30,000원',
     size: '6.5 g / 0.22 oz',
     shade: '#F0EDF5',
     type: 'Highlighter balm',
@@ -67,7 +67,7 @@ const products = {
     name: 'Pearl Veil',
     nameKo: '펄 베일',
     weeklyText: '달빛이 가장 먼저\n피부에 내려앉는 순간',
-    price: '$21',
+    price: '30,000원',
     size: '6.5 g / 0.22 oz',
     shade: '#F0EDF5',
     type: 'Pearl balm',
@@ -110,7 +110,7 @@ const products = {
     name: 'Lilac Glow',
     nameKo: '라일락 글로우',
     weeklyText: '차가운 라벤더 빛이\n피부 위에 스며드는 시간',
-    price: '$24',
+    price: '35,000원',
     size: '6.5 g / 0.22 oz',
     shade: '#E8E4F2',
     type: 'Light base',
@@ -152,7 +152,7 @@ const products = {
     name: 'Pink Aura',
     nameKo: '핑크 오라',
     weeklyText: '얼어붙은 오로라처럼\n투명하게 빛나는 핑크',
-    price: '$19',
+    price: '27,000원',
     size: '6.5 g / 0.22 oz',
     shade: '#F5E8EF',
     type: 'Soft tint',
@@ -194,7 +194,7 @@ const products = {
     name: 'Blue Haze',
     nameKo: '블루 헤이즈',
     weeklyText: '새벽 공기의 푸른\n고요한 광채',
-    price: '$22',
+    price: '32,000원',
     size: '6.5 g / 0.22 oz',
     shade: '#E4ECF5',
     type: 'Clear highlighter',
@@ -286,6 +286,8 @@ function ProductGallery({ product }) {
         <img
           src={activeItem.image}
           alt={product.name}
+          fetchpriority="high"
+          decoding="async"
           className={`relative z-10 h-full w-full mix-blend-normal transition-transform duration-700 ease-out group-hover:scale-[1.035] ${
             isDetailCut ? 'object-cover' : 'max-h-full max-w-full object-contain'
           }`}
@@ -293,7 +295,7 @@ function ProductGallery({ product }) {
       </div>
 
       <div className="relative z-10 border-t border-[#ded5e3]/70 pt-3">
-        <p className="mb-2 font-pretendard text-[10px] font-light leading-[1.55] text-[#8c8496]">
+        <p className="mb-2 font-pretendard text-[11px] font-light leading-[1.55] text-[#8c8496]">
           {activeItem.caption}
         </p>
         <div className="grid grid-cols-3 gap-3">
@@ -314,6 +316,8 @@ function ProductGallery({ product }) {
               <img
                 src={item.image}
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className={`transition-transform duration-500 hover:scale-[1.08] ${
                   item.label === 'Detail'
                     ? 'h-full w-full object-cover'
@@ -330,8 +334,8 @@ function ProductGallery({ product }) {
 
 function InfoRow({ label, children }) {
   return (
-    <div className="grid grid-cols-[112px_1fr] border-t border-[#ded8e5] py-3.5 text-[11px] leading-[1.65] text-[#5a5562]">
-      <dt className="font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
+    <div className="grid grid-cols-[112px_1fr] border-t border-[#ded8e5] py-3.5 text-[12px] leading-[1.65] text-[#5a5562]">
+      <dt className="font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
         {label}
       </dt>
       <dd className="font-pretendard font-light">{children}</dd>
@@ -369,24 +373,24 @@ function ProductDetailPage() {
                 <h1 className="font-didot text-[32px] font-normal leading-none tracking-[0.01em] text-[#2a2630] md:text-[36px]">
                   {product.name}
                 </h1>
-                <p className="mt-2.5 font-pretendard text-[11px] font-light text-[#6d6676]">
+                <p className="mt-2.5 font-pretendard text-[12px] font-light text-[#6d6676]">
                   {product.nameKo}
                 </p>
-                <p className="mt-3 font-pretendard text-[11px] font-light text-[#9a93a5]">
+                <p className="mt-3 font-pretendard text-[12px] font-light text-[#9a93a5]">
                   {product.size}
                 </p>
               </div>
               <p className="font-pretendard text-[16px] font-medium text-[#2a2630]">{product.price}</p>
             </div>
 
-            <p className="mb-3 whitespace-pre-line font-pretendard text-[11px] font-light leading-[1.6] text-[#9a93a5]">
+            <p className="mb-3 whitespace-pre-line font-pretendard text-[12px] font-light leading-[1.6] text-[#9a93a5]">
               {product.weeklyText}
             </p>
-            <p className="mb-7 max-w-[560px] font-pretendard text-[12px] font-light leading-[1.7] text-[#4f4958]">
+            <p className="mb-7 max-w-[560px] font-pretendard text-[13px] font-light leading-[1.7] text-[#4f4958]">
               {product.description}
             </p>
 
-            <div className="mb-7 flex gap-11 font-pretendard text-[11px] text-[#6d6676]">
+            <div className="mb-7 flex gap-11 font-pretendard text-[12px] text-[#6d6676]">
               {product.swatches.map((swatch, index) => (
                 <label key={swatch} className="flex items-center gap-3">
                   <span
@@ -400,10 +404,10 @@ function ProductDetailPage() {
             </div>
 
             <div className="mb-7 grid grid-cols-2 gap-4">
-              <button className="h-[48px] rounded-[5px] bg-[#29252d] font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80">
+              <button className="h-[48px] rounded-[5px] bg-[#29252d] font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80">
                 Add to cart
               </button>
-              <button className="h-[48px] rounded-[5px] border border-[#ded8e5] bg-white/55 font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]">
+              <button className="h-[48px] rounded-[5px] border border-[#ded8e5] bg-white/55 font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]">
                 Add to wishlist
               </button>
             </div>
@@ -424,16 +428,18 @@ function ProductDetailPage() {
             <img
               src={product.textureImage}
               alt={`${product.name} texture`}
+              loading="lazy"
+              decoding="async"
               className={`w-full object-contain ${product.textureImageClass}`}
             />
           </div>
 
           <dl className="w-full max-w-[560px]">
             <div className="pb-8">
-              <dt className="font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
+              <dt className="font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
                 How to use
               </dt>
-              <dd className="mt-3 font-pretendard text-[12px] font-light leading-[1.7] text-[#6b6472]">
+              <dd className="mt-3 font-pretendard text-[13px] font-light leading-[1.7] text-[#6b6472]">
                 {product.howTo}
               </dd>
             </div>
@@ -469,6 +475,8 @@ function ProductDetailPage() {
                   <img
                     src={item.cardImage}
                     alt={item.name}
+                    loading="lazy"
+                    decoding="async"
                     className={`h-auto max-h-[76%] w-auto max-w-[46%] object-contain transition-transform duration-700 group-hover:scale-[1.04] ${
                       item.relatedImageClass ?? ''
                     }`}
@@ -477,9 +485,9 @@ function ProductDetailPage() {
                 <div className="flex items-end justify-between gap-4">
                   <div>
                     <h3 className="font-pretendard text-[14px] font-light text-[#2b2730]">{item.name}</h3>
-                    <p className="mt-1.5 font-pretendard text-[11px] font-light text-[#8e8798]">{item.type}</p>
+                    <p className="mt-1.5 font-pretendard text-[12px] font-light text-[#8e8798]">{item.type}</p>
                   </div>
-                  <p className="font-pretendard text-[11px] font-medium text-[#2b2730]">{item.price}</p>
+                  <p className="font-pretendard text-[12px] font-medium text-[#2b2730]">{item.price}</p>
                 </div>
               </a>
             ))}

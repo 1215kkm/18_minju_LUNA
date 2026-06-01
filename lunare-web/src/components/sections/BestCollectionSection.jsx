@@ -97,6 +97,8 @@ function BestCollectionSection() {
               key={i}
               src={src}
               alt={BEST_COLLECTION[i].name}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
               style={{ opacity: i === activeIdx ? 1 : 0 }}
             />

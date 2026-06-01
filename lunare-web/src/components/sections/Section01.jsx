@@ -31,6 +31,8 @@ function Section01() {
           key={key}
           src={SLIDES[current]}
           alt=""
+          loading="lazy"
+          decoding="async"
           className="slide-enter absolute inset-0 w-full h-full object-cover object-center"
         />
         {/* 도트 인디케이터 */}
