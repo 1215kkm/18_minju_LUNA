@@ -7,6 +7,7 @@ import pearlVeilMain from '../../assets/images/sub/pearl-veil-main-front_rbg.web
 import pearlVeilSub from '../../assets/images/sub/pearl-veil-main-generated_rbg.webp'
 import pearlVeilParticle from '../../assets/images/sub/pearl-veil-particle-detail.webp'
 import pearlVeilTexture from '../../assets/images/sub/pearl-veil-texture_rbg.webp'
+import moonVeilTexture from '../../assets/images/sub/Moon Veil_tax_1.png'
 import lilacGlowFront from '../../assets/images/sub/lilac-glow-front_rbg.webp'
 import lilacGlowSupport from '../../assets/images/sub/lilac-glow-support_rbg.webp'
 import lilacGlowParticle from '../../assets/images/sub/lilac-glow-particle-detail.webp'
@@ -59,7 +60,7 @@ const products = {
         image: pearlVeilParticle,
       },
     ],
-    textureImage: pearlVeilTexture,
+    textureImage: moonVeilTexture,
     textureImageClass: 'max-w-[440px] lg:max-w-[500px]',
     cardImage: moonVeilFront,
   },
