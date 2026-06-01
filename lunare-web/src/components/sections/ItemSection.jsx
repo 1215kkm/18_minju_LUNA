@@ -20,8 +20,6 @@ function ItemCard({ item, img }) {
         <img
           src={img}
           alt={item.name}
-          loading="lazy"
-          decoding="async"
           className="w-full h-full object-contain p-8 transition-transform duration-700 group-hover:scale-105"
         />
         {/* 호버 오버레이 */}
@@ -33,14 +31,14 @@ function ItemCard({ item, img }) {
       </div>
 
       {/* 영문명 */}
-      <p className="font-pretendard text-[14px] tracking-[0.16em] text-[#1a1a1a] uppercase mb-1.5 font-medium text-center">
+      <p className="font-pretendard text-[16px] tracking-[0.18em] text-[#1a1a1a] uppercase mb-1 font-light text-center">
         {item.name}
       </p>
-      <p className="font-pretendard text-[12px] text-[#5a5462] font-light mb-3 text-center">
+      <p className="font-pretendard text-[14px] text-[#1a1a1a] font-light mb-3 text-center">
         {item.nameKo}
       </p>
       <div className="w-5 h-px bg-[#c8c4d0] mb-3" />
-      <p className="font-pretendard text-[11px] leading-[1.85] text-[#9a94a5] font-light text-center whitespace-pre-line">
+      <p className="font-pretendard text-[14px] leading-[1.8] text-[#9a94a5] font-light text-center whitespace-pre-line">
         {item.desc}
       </p>
     </a>

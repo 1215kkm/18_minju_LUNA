@@ -65,22 +65,22 @@ function BestCollectionSection() {
               <div className={`transition-transform duration-300 ${activeIdx === i ? 'translate-x-1' : ''}`}>
                 <div className="flex items-baseline gap-3 mb-2">
                   <span className={`font-didot font-normal text-[#1a1a1a] tracking-[0.03em] transition-all duration-300 ${
-                    activeIdx === i ? 'text-[18px] md:text-[21px]' : 'text-[16px] md:text-[19px]'
+                    activeIdx === i ? 'text-[20px] md:text-[23px]' : 'text-[18px] md:text-[21px]'
                   }`}>
                     {item.name}
                   </span>
                   <span className={`font-pretendard font-light transition-colors duration-300 ${
-                    activeIdx === i ? 'text-[10px] text-[#7a7485]' : 'text-[10px] text-[#b0aab8]'
+                    activeIdx === i ? 'text-[12px] text-[#7a7485]' : 'text-[12px] text-[#b0aab8]'
                   }`}>
                     {item.nameKo}
                   </span>
                 </div>
-                <p className={`font-pretendard text-[10px] tracking-[0.16em] uppercase mb-1 font-light transition-colors duration-300 ${
+                <p className={`font-pretendard text-[12px] tracking-[0.16em] uppercase mb-1 font-light transition-colors duration-300 ${
                   activeIdx === i ? 'text-[#5a5560]' : 'text-[#3a3540]'
                 }`}>
                   {item.type}
                 </p>
-                <p className={`font-pretendard text-[10px] font-light transition-colors duration-300 ${
+                <p className={`font-pretendard text-[12px] font-light transition-colors duration-300 ${
                   activeIdx === i ? 'text-[#7a7485]' : 'text-[#b0aab8]'
                 }`}>
                   {item.typeKo}
