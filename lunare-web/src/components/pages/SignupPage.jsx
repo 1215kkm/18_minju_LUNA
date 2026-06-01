@@ -34,12 +34,23 @@ function SignupPage() {
       {/* 로고 — 좌상단 */}
       <div className="absolute top-9 left-10 z-10">
         <a href="#" onClick={() => { window.location.hash = ''; window.scrollTo(0, 0) }}>
-          <img src={smallLogo} alt="LUNARÉ" className="h-[13px] object-contain" style={{ filter: 'brightness(0) invert(1)' }} />
+          <img src={smallLogo} alt="LUNARÉ" className="h-[18px] object-contain" style={{ filter: 'brightness(0) invert(1)' }} />
         </a>
       </div>
 
       {/* 박스 */}
       <div className="relative z-10 w-full max-w-[620px] mx-6 bg-white/90 backdrop-blur-md px-16 py-16">
+
+        <button
+          type="button"
+          onClick={() => { history.back() }}
+          className="flex items-center gap-1.5 font-pretendard text-[11px] font-light text-[#b0a8ba] hover:text-[#2a2630] transition-colors duration-300 mb-10 -ml-0.5"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          뒤로
+        </button>
 
         <div className="mb-8">
           <h1 className="font-didot text-[24px] font-normal text-[#2a2630] leading-tight tracking-wide">

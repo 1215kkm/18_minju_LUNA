@@ -29,6 +29,8 @@ function BrandPage() {
             <img
               src={brandImg}
               alt="LUNARÉ pink highlighter compact on glass with soft reflected light"
+              fetchpriority="high"
+              decoding="async"
               className="h-full w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-white/8" aria-hidden="true" />
@@ -40,6 +42,8 @@ function BrandPage() {
             <img
               src={brandBg}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 h-full w-full object-cover object-center opacity-40 brightness-[1.08] contrast-[1.08] saturate-[1.04]"
               aria-hidden="true"
             />

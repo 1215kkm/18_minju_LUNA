@@ -13,7 +13,6 @@ import pearlVeilFront from '../../assets/images/sub/pearl-veil-main-front_rbg.we
 import lilacGlowFront from '../../assets/images/sub/lilac-glow-front_rbg.webp'
 import pinkAuraFront from '../../assets/images/sub/pink-aura-front_rbg.webp'
 import blueHazeFront from '../../assets/images/sub/blue-haze-front_rbg.webp'
-import subHero from '../../assets/images/sub/sub_hero.webp'
 
 const categories = [
   { label: 'New', path: '#/shop/new', key: 'new' },
@@ -29,7 +28,7 @@ const products = [
     name: 'Lucent Veil',
     nameKo: '루센트 베일',
     category: 'Base Glow',
-    price: '$27',
+    price: '39,000원',
     image: glowB01,
     groups: ['all', 'best-sellers'],
   },
@@ -38,7 +37,7 @@ const products = [
     name: 'Moon Veil',
     nameKo: '문 베일',
     category: 'Balm Highlighter',
-    price: '$21',
+    price: '30,000원',
     image: balmH01,
     groups: ['all', 'balm', 'best-sellers'],
   },
@@ -47,7 +46,7 @@ const products = [
     name: 'Prism Drop',
     nameKo: '프리즘 드롭',
     category: 'Liquid Highlighter',
-    price: '$24',
+    price: '35,000원',
     image: liquidH01,
     groups: ['all', 'liquid', 'best-sellers'],
   },
@@ -56,7 +55,7 @@ const products = [
     name: 'Pearl Fluid',
     nameKo: '펄 플루이드',
     category: 'Liquid Highlighter',
-    price: '$24',
+    price: '35,000원',
     image: liquidH02,
     groups: ['all', 'liquid'],
   },
@@ -65,7 +64,7 @@ const products = [
     name: 'Dewy Orbit',
     nameKo: '듀이 오빗',
     category: 'Liquid Highlighter',
-    price: '$24',
+    price: '35,000원',
     image: liquidH03,
     groups: ['all', 'liquid'],
   },
@@ -74,7 +73,7 @@ const products = [
     name: 'Moon Fluid',
     nameKo: '문 플루이드',
     category: 'Liquid Highlighter',
-    price: '$24',
+    price: '35,000원',
     image: liquidH04,
     groups: ['all', 'liquid'],
   },
@@ -83,7 +82,7 @@ const products = [
     name: 'Lilac Glow',
     nameKo: '라일락 글로우',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: lilacGlowFront,
     groups: ['all', 'balm'],
   },
@@ -92,7 +91,7 @@ const products = [
     name: 'Pearl Veil',
     nameKo: '펄 베일',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: pearlVeilFront,
     imageClass: 'scale-[1.16] group-hover:scale-[1.19]',
     groups: ['all', 'balm'],
@@ -102,7 +101,7 @@ const products = [
     name: 'Pink Aura',
     nameKo: '핑크 오라',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: pinkAuraFront,
     groups: ['all', 'balm'],
   },
@@ -111,7 +110,7 @@ const products = [
     name: 'Blue Haze',
     nameKo: '블루 헤이즈',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: blueHazeFront,
     groups: ['all', 'balm'],
   },
@@ -120,7 +119,7 @@ const products = [
     name: 'Aura Melt',
     nameKo: '오라 멜트',
     category: 'Multi Balm',
-    price: '$19',
+    price: '27,000원',
     image: multiB01,
     groups: ['all', 'best-sellers'],
   },
@@ -129,7 +128,7 @@ const products = [
     name: 'Soft Orbit',
     nameKo: '소프트 오빗',
     category: 'Multi Balm',
-    price: '$20',
+    price: '29,000원',
     image: multiB02,
     groups: ['all'],
   },
@@ -138,7 +137,7 @@ const products = [
     name: 'Glow Melt',
     nameKo: '글로우 멜트',
     category: 'Multi Balm',
-    price: '$20',
+    price: '29,000원',
     image: multiB03,
     groups: ['all'],
   },
@@ -150,7 +149,7 @@ const newProducts = [
     name: 'Pearl Veil',
     nameKo: '펄 베일',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: pearlVeilFront,
     imageClass: 'scale-[1.16] group-hover:scale-[1.19]',
   },
@@ -159,7 +158,7 @@ const newProducts = [
     name: 'Lilac Glow',
     nameKo: '라일락 글로우',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: lilacGlowFront,
   },
   {
@@ -167,7 +166,7 @@ const newProducts = [
     name: 'Pink Aura',
     nameKo: '핑크 오라',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: pinkAuraFront,
   },
   {
@@ -175,7 +174,7 @@ const newProducts = [
     name: 'Blue Haze',
     nameKo: '블루 헤이즈',
     category: 'Balm Highlighter',
-    price: '$22',
+    price: '32,000원',
     image: blueHazeFront,
   },
 ]
@@ -185,31 +184,26 @@ const pageCopy = {
     eyebrow: 'New In',
     title: 'This week, softly.',
     heading: 'New',
-    heroImage: subHero,
   },
   'best-sellers': {
     eyebrow: 'Best Sellers',
     title: 'Most loved glow.',
     heading: 'Best Sellers',
-    heroImage: subHero,
   },
   all: {
     eyebrow: 'Highlighter Collection',
     title: 'Light, layered softly.',
     heading: 'All Products',
-    heroImage: subHero,
   },
   liquid: {
     eyebrow: 'Liquid Highlighter',
     title: 'A fluid veil of light.',
     heading: 'Liquid',
-    heroImage: subHero,
   },
   balm: {
     eyebrow: 'Balm Highlighter',
     title: 'Glow that melts in.',
     heading: 'Balm',
-    heroImage: subHero,
   },
 }
 
@@ -226,36 +220,32 @@ function getProductsForPage(activePage) {
 
 function CategoryNav({ activePage }) {
   return (
-    <nav className="grid w-full grid-cols-2 gap-y-5 font-pretendard text-[12px] font-light text-[#9b94a4] md:grid-cols-5">
-      {categories.map((category) => (
-        <a
-          key={category.key}
-          href={category.path}
-          className={`relative flex h-10 items-center justify-center text-center transition-colors duration-300 hover:text-[#2c2731] ${
-            category.key === activePage ? 'text-[#2c2731]' : ''
-          }`}
-          onClick={() => window.scrollTo(0, 0)}
-        >
-          {category.key === activePage && (
-            <span className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[#2c2731]" />
-          )}
-          {category.label}
-        </a>
-      ))}
+    <nav className="flex w-full overflow-x-auto scrollbar-none font-pretendard text-[12px] font-light text-[#9b94a4]">
+      {categories.map((category) => {
+        const isActive = category.key === activePage
+        return (
+          <a
+            key={category.key}
+            href={category.path}
+            className={`relative shrink-0 px-5 py-3 text-center transition-colors duration-300 hover:text-[#2c2731] first:pl-0 ${
+              isActive ? 'text-[#2c2731]' : ''
+            }`}
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            {category.label}
+            {isActive && (
+              <span className="absolute bottom-0 left-0 right-0 h-px bg-[#2c2731]" />
+            )}
+          </a>
+        )
+      })}
     </nav>
   )
 }
 
 function ShopHero({ activePage, copy }) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#f6f3f8] pt-[var(--header-h)]">
-      <img
-        src={copy.heroImage}
-        alt=""
-        className="absolute inset-0 -z-20 h-full w-full object-cover opacity-36"
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(251,250,252,0.58),rgba(251,250,252,0.28)_42%,rgba(251,250,252,0.78)_76%,#fbfafc_100%)]" />
+    <section className="relative bg-[#fbfafc] pt-[var(--header-h)]">
       <div className="mx-auto flex min-h-[240px] max-w-[1440px] flex-col px-5 md:min-h-[285px] md:px-10">
         <div className="flex min-w-0 flex-1 items-start justify-center pb-5 pt-6 text-center md:pb-6 md:pt-7">
           <div className="mx-auto w-full max-w-[260px] md:max-w-[520px]">
@@ -292,6 +282,8 @@ function ProductCard({ product }) {
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
+            decoding="async"
             className={`relative z-10 h-full w-full object-contain drop-shadow-[0_16px_22px_rgba(80,72,96,0.12)] transition-transform duration-700 ${
               product.imageClass ?? 'group-hover:scale-[1.035]'
             }`}
@@ -299,14 +291,14 @@ function ProductCard({ product }) {
         </div>
 
         <div className="text-center">
-          <p className="font-pretendard text-[11px] font-light uppercase tracking-[0.16em] text-[#2d2832]">
+          <p className="font-pretendard text-[12px] font-light uppercase tracking-[0.16em] text-[#2d2832]">
             {product.name}
           </p>
-          <p className="mt-2 font-pretendard text-[11px] font-light text-[#8d8596]">{product.nameKo}</p>
-          <p className="mt-3 font-pretendard text-[10px] font-light uppercase tracking-[0.12em] text-[#aaa3b1]">
+          <p className="mt-2 font-pretendard text-[12px] font-light text-[#8d8596]">{product.nameKo}</p>
+          <p className="mt-3 font-pretendard text-[11px] font-light uppercase tracking-[0.12em] text-[#aaa3b1]">
             {product.category}
           </p>
-          <p className="mt-3 font-pretendard text-[11px] font-light text-[#2d2832]">{product.price}</p>
+          <p className="mt-3 font-pretendard text-[12px] font-light text-[#2d2832]">{product.price}</p>
         </div>
       </a>
     </article>
