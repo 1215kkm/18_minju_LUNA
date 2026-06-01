@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useCart } from '../../context/CartContext'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
 import moonVeilFront from '../../assets/images/shop/balm_h01.webp'
@@ -343,14 +344,71 @@ function InfoRow({ label, children }) {
   )
 }
 
+function AddedToCartModal({ product, shade, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [onClose])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/30 sm:items-center"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-[420px] rounded-t-[12px] bg-[#fbfafc] p-6 sm:rounded-[10px]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="mb-5 flex items-center gap-4">
+          <div className="flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-[6px] bg-[#f7f4f8]">
+            <img src={product.cardImage} alt={product.name} className="max-h-[76%] max-w-[70%] object-contain" />
+          </div>
+          <div>
+            <p className="font-pretendard text-[11px] font-light uppercase tracking-[0.22em] text-[#9a93a5]">
+              장바구니에 담겼습니다
+            </p>
+            <p className="mt-1 font-didot text-[20px] font-normal leading-none text-[#2a2630]">{product.name}</p>
+            <p className="mt-1.5 font-pretendard text-[12px] font-light text-[#8d8596]">{shade}</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            className="h-[44px] rounded-[5px] border border-[#ded8e5] font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]"
+          >
+            계속 쇼핑
+          </button>
+          <a
+            href="#/cart"
+            onClick={() => { window.scrollTo(0, 0); onClose() }}
+            className="flex h-[44px] items-center justify-center rounded-[5px] bg-[#29252d] font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80"
+          >
+            장바구니 보기
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ProductDetailPage() {
   const [product, setProduct] = useState(() => findProductByPath())
+  const [selectedSwatchIndex, setSelectedSwatchIndex] = useState(0)
+  const [cartModal, setCartModal] = useState(false)
+  const { addItem } = useCart()
 
   useEffect(() => {
-    const onHashChange = () => setProduct(findProductByPath())
+    const onHashChange = () => { setProduct(findProductByPath()); setSelectedSwatchIndex(0) }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
+
+  const handleAddToCart = () => {
+    addItem(product, product.swatches[selectedSwatchIndex])
+    setCartModal(true)
+  }
 
   const relatedItems = newItemSlugs
     .map((slug) => products[slug])
@@ -392,10 +450,10 @@ function ProductDetailPage() {
 
             <div className="mb-7 flex gap-11 font-pretendard text-[12px] text-[#6d6676]">
               {product.swatches.map((swatch, index) => (
-                <label key={swatch} className="flex items-center gap-3">
+                <label key={swatch} className="flex cursor-pointer items-center gap-3" onClick={() => setSelectedSwatchIndex(index)}>
                   <span
-                    className={`h-3 w-3 rounded-full border ${
-                      index === 0 ? 'border-[#2a2630] bg-[#2a2630]' : 'border-[#bbb2c8] bg-transparent'
+                    className={`h-3 w-3 rounded-full border transition-colors ${
+                      index === selectedSwatchIndex ? 'border-[#2a2630] bg-[#2a2630]' : 'border-[#bbb2c8] bg-transparent'
                     }`}
                   />
                   {swatch}
@@ -404,7 +462,11 @@ function ProductDetailPage() {
             </div>
 
             <div className="mb-7 grid grid-cols-2 gap-4">
-              <button className="h-[48px] rounded-[5px] bg-[#29252d] font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="h-[48px] rounded-[5px] bg-[#29252d] font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80"
+              >
                 Add to cart
               </button>
               <button className="h-[48px] rounded-[5px] border border-[#ded8e5] bg-white/55 font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]">
@@ -495,6 +557,13 @@ function ProductDetailPage() {
         </section>
       </main>
       <Footer compact />
+      {cartModal && (
+        <AddedToCartModal
+          product={product}
+          shade={product.swatches[selectedSwatchIndex]}
+          onClose={() => setCartModal(false)}
+        />
+      )}
     </div>
   )
 }

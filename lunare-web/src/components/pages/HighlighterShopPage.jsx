@@ -220,7 +220,7 @@ function getProductsForPage(activePage) {
 
 function CategoryNav({ activePage }) {
   return (
-    <nav className="flex w-full overflow-x-auto scrollbar-none font-pretendard text-[12px] font-light text-[#9b94a4]">
+    <nav className="flex w-full overflow-x-auto scrollbar-none font-pretendard text-[13px] font-light text-[#9b94a4]">
       {categories.map((category) => {
         const isActive = category.key === activePage
         return (
@@ -249,10 +249,10 @@ function ShopHero({ activePage, copy }) {
       <div className="mx-auto flex min-h-[240px] max-w-[1440px] flex-col px-5 md:min-h-[285px] md:px-10">
         <div className="flex min-w-0 flex-1 items-start justify-center pb-5 pt-6 text-center md:pb-6 md:pt-7">
           <div className="mx-auto w-full max-w-[260px] md:max-w-[520px]">
-            <p className="mb-4 font-pretendard text-[9px] font-light uppercase tracking-[0.28em] text-[#8f8799]">
+            <p className="mb-4 font-pretendard text-[12px] font-light uppercase tracking-[0.28em] text-[#8f8799]">
               {copy.eyebrow}
             </p>
-            <h1 className="font-didot text-[28px] font-normal leading-[1.08] text-[#2c2731] md:text-[46px]">
+            <h1 className="font-didot text-[32px] font-normal leading-[1.08] text-[#2c2731] md:text-[50px]">
               {copy.title}
             </h1>
           </div>
@@ -291,14 +291,14 @@ function ProductCard({ product }) {
         </div>
 
         <div className="text-center">
-          <p className="font-pretendard text-[12px] font-light uppercase tracking-[0.16em] text-[#2d2832]">
+          <p className="font-pretendard text-[15px] font-light uppercase tracking-[0.16em] text-[#2d2832]">
             {product.name}
           </p>
-          <p className="mt-2 font-pretendard text-[12px] font-light text-[#8d8596]">{product.nameKo}</p>
-          <p className="mt-3 font-pretendard text-[11px] font-light uppercase tracking-[0.12em] text-[#aaa3b1]">
+          <p className="mt-2 font-pretendard text-[13px] font-light text-[#8d8596]">{product.nameKo}</p>
+          <p className="mt-3 font-pretendard text-[12px] font-light uppercase tracking-[0.12em] text-[#aaa3b1]">
             {product.category}
           </p>
-          <p className="mt-3 font-pretendard text-[12px] font-light text-[#2d2832]">{product.price}</p>
+          <p className="mt-3 font-pretendard text-[15px] font-light text-[#2d2832]">{product.price}</p>
         </div>
       </a>
     </article>
@@ -318,13 +318,13 @@ function HighlighterShopPage() {
 
         <section className="mx-auto max-w-[1440px] px-5 pb-24 pt-14 md:px-10 md:pt-18">
           <div className="mb-14 grid grid-cols-[1fr_auto_1fr] items-center font-pretendard">
-            <button className="justify-self-start text-[12px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
+            <button className="justify-self-start text-[13px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
               Filter by ▾
             </button>
             <h2 className="font-didot text-[30px] font-normal text-[#2c2731] md:text-[36px]">
               {copy.heading}
             </h2>
-            <button className="justify-self-end text-[12px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
+            <button className="justify-self-end text-[13px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
               Sort by ▾
             </button>
           </div>
@@ -336,7 +336,7 @@ function HighlighterShopPage() {
           </div>
 
           <div className="pt-20 text-center">
-            <button className="font-pretendard text-[12px] font-light text-[#2d2832] underline-offset-4 transition-opacity hover:opacity-50">
+            <button className="font-pretendard text-[13px] font-light text-[#2d2832] underline-offset-4 transition-opacity hover:opacity-50">
               Load more
             </button>
           </div>

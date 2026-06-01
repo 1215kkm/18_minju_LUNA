@@ -91,7 +91,7 @@ function BestCollectionSection() {
         </ul>
 
         {/* 우측 이미지 — 좌측과 동일 높이, 오른쪽 끝까지 꽉 채움 */}
-        <div className="hidden md:block flex-1 relative overflow-hidden">
+        <div className="hidden md:block flex-1 relative overflow-hidden" style={{ background: '#FDFDFD' }}>
           {DETAIL_IMGS.map((src, i) => (
             <img
               key={i}
@@ -99,7 +99,7 @@ function BestCollectionSection() {
               alt={BEST_COLLECTION[i].name}
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+              className="absolute inset-0 w-full h-full object-contain object-right transition-opacity duration-1000"
               style={{ opacity: i === activeIdx ? 1 : 0 }}
             />
           ))}

@@ -25,11 +25,11 @@ function FullTitleSection() {
       {/* 콘텐츠 — 좌하단 */}
       <div className="relative z-10 h-full flex flex-col justify-end px-16 md:px-24 lg:px-32 pb-20">
         {/* GFS Didot 타이틀 */}
-        <h2 className="font-didot text-[26px] md:text-[32px] font-normal text-[#1a1a1a] tracking-[0.1em] mb-4 leading-tight">
+        <h2 className="font-didot text-[36px] md:text-[48px] font-normal text-[#1a1a1a] tracking-[0.1em] mb-4 leading-tight">
           BEYOND THE LIGHT
         </h2>
 
-        <p className="font-pretendard text-[12px] leading-[1.9] text-[#3a3540] font-light mb-7">
+        <p className="font-pretendard text-[15px] leading-[1.9] text-[#3a3540] font-light mb-7">
           피부 위를 스치는 빛을 넘어<br />
           당신만의 존재감을 완성하는 새로운 광채의 경험
         </p>

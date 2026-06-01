@@ -102,7 +102,7 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
           <div className="relative">
             <button
               type="button"
-              className="font-pretendard flex items-center gap-1.5 text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity"
+              className="font-pretendard flex items-center gap-1.5 text-[15px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity"
               aria-label="Shop categories"
               aria-expanded={shopOpen}
               onClick={() => {
@@ -132,7 +132,7 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
                   <a
                     key={item.href}
                     href={item.href}
-                    className="font-pretendard text-[11px] font-light tracking-[0.08em] text-[#3a3540] transition-opacity hover:opacity-55"
+                    className="font-pretendard text-[16px] font-light tracking-[0.08em] text-[#3a3540] transition-opacity hover:opacity-55"
                     onClick={closeMenus}
                   >
                     {item.label}
@@ -153,7 +153,7 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
             <img
               src={smallLogo}
               alt="LUNARÉ"
-              className="h-[13px] w-auto object-contain md:h-[15px]"
+              className="h-[17px] w-auto object-contain md:h-[19px]"
               style={{ filter: logoFilter }}
             />
           </a>
@@ -163,14 +163,14 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
         <div className={`flex items-center gap-4 transition-colors duration-500 md:gap-6 ${rightTextColor}`}>
           <a
             href="#/login"
-            className="font-pretendard hidden items-center text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity sm:flex"
+            className="font-pretendard hidden items-center text-[15px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity sm:flex"
             onClick={closeMenus}
           >
             로그인
           </a>
           <a
             href="#/cart"
-            className="font-pretendard text-[13px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity"
+            className="font-pretendard text-[15px] font-light tracking-[0.06em] hover:opacity-50 transition-opacity"
             onClick={closeMenus}
           >
             장바구니
@@ -185,12 +185,12 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
         }`}
       >
         <div className="mb-6 flex items-center justify-between border-b border-[#ded8e5] pb-4">
-          <p className="font-pretendard text-[10px] font-light uppercase tracking-[0.24em] text-[#9a93a5]">
+          <p className="font-pretendard text-[12px] font-light uppercase tracking-[0.24em] text-[#9a93a5]">
             LUNARÉ
           </p>
           <button
             type="button"
-            className="font-pretendard text-[10px] font-light uppercase tracking-[0.18em] text-[#9a93a5] transition-colors hover:text-[#29242d]"
+            className="font-pretendard text-[12px] font-light uppercase tracking-[0.18em] text-[#9a93a5] transition-colors hover:text-[#29242d]"
             onClick={() => setMenuOpen(false)}
           >
             Close
@@ -205,10 +205,10 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
               className="group grid grid-cols-[1fr_auto] items-center gap-8 border-b border-[#ded8e5]/75 py-5 md:py-6"
               onClick={closeMenus}
             >
-              <span className="font-didot text-[25px] font-normal leading-none text-[#29242d] transition-transform duration-300 group-hover:translate-x-1 md:text-[29px]">
+              <span className="font-didot text-[28px] font-normal leading-none text-[#29242d] transition-transform duration-300 group-hover:translate-x-1 md:text-[32px]">
                 {item.label}
               </span>
-              <span className="max-w-[124px] text-right font-pretendard text-[9px] font-light uppercase leading-[1.8] tracking-[0.14em] text-[#aaa3b1]">
+              <span className="max-w-[124px] text-right font-pretendard text-[11px] font-light uppercase leading-[1.8] tracking-[0.14em] text-[#aaa3b1]">
                 {item.sub}
               </span>
             </a>
