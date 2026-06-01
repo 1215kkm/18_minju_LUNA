@@ -1,43 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
-import pearlVeilFront from '../../assets/images/sub/pearl-veil-main-front_rbg.webp'
-import lilacGlowFront from '../../assets/images/sub/lilac-glow-front_rbg.webp'
-import blueHazeFront from '../../assets/images/sub/blue-haze-front_rbg.webp'
-
-const initialItems = [
-  {
-    id: 'pearl-veil',
-    name: 'Pearl Veil',
-    nameKo: '펄 베일',
-    type: 'Balm Highlighter',
-    shade: '01 Pearl',
-    price: 29000,
-    quantity: 1,
-    image: pearlVeilFront,
-    imageClass: 'scale-[1.12]',
-  },
-  {
-    id: 'lilac-glow',
-    name: 'Lilac Glow',
-    nameKo: '라일락 글로우',
-    type: 'Light Base',
-    shade: '01 Lilac',
-    price: 32000,
-    quantity: 2,
-    image: lilacGlowFront,
-  },
-  {
-    id: 'blue-haze',
-    name: 'Blue Haze',
-    nameKo: '블루 헤이즈',
-    type: 'Clear Highlighter',
-    shade: '01 Haze',
-    price: 29000,
-    quantity: 1,
-    image: blueHazeFront,
-  },
-]
+import { useCart } from '../../context/CartContext'
 
 const MAX_QUANTITY = 99
 
@@ -193,7 +157,7 @@ function EmptyCart() {
 }
 
 function CartPage() {
-  const [items, setItems] = useState(initialItems)
+  const { items, removeItem: contextRemoveItem, updateQuantity: contextUpdateQuantity } = useCart()
   const [giftWrap, setGiftWrap] = useState(false)
   const [undoTarget, setUndoTarget] = useState(null)
   const undoRef = useRef(null)
@@ -205,36 +169,17 @@ function CartPage() {
   const giftWrapFee = giftWrap ? 3000 : 0
   const total = subtotal + giftWrapFee
 
-  const updateQuantity = (id, direction) => {
-    setItems((currentItems) =>
-      currentItems.map((item) => {
-        if (item.id !== id) return item
-        if (direction === 'increase') {
-          return { ...item, quantity: Math.min(MAX_QUANTITY, item.quantity + 1) }
-        }
-        const next = item.quantity - 1
-        if (next < 1) return item
-        return { ...item, quantity: next }
-      })
-    )
-  }
+  const updateQuantity = (key, direction) => contextUpdateQuantity(key, direction)
 
-  const removeItem = (id) => {
-    setItems((currentItems) => {
-      const target = currentItems.find((item) => item.id === id)
-      if (!target) return currentItems
-      setUndoTarget({ item: target, index: currentItems.indexOf(target) })
-      return currentItems.filter((item) => item.id !== id)
-    })
+  const removeItem = (key) => {
+    const target = items.find((item) => item.key === key)
+    if (!target) return
+    setUndoTarget({ item: target, index: items.indexOf(target) })
+    contextRemoveItem(key)
   }
 
   const handleUndo = () => {
     if (!undoTarget) return
-    setItems((currentItems) => {
-      const next = [...currentItems]
-      next.splice(undoTarget.index, 0, undoTarget.item)
-      return next
-    })
     setUndoTarget(null)
   }
 
@@ -277,11 +222,11 @@ function CartPage() {
 
                 {items.map((item) => (
                   <CartItem
-                    key={item.id}
+                    key={item.key}
                     item={item}
-                    onDecrease={() => updateQuantity(item.id, 'decrease')}
-                    onIncrease={() => updateQuantity(item.id, 'increase')}
-                    onRemove={() => removeItem(item.id)}
+                    onDecrease={() => updateQuantity(item.key, 'decrease')}
+                    onIncrease={() => updateQuantity(item.key, 'increase')}
+                    onRemove={() => removeItem(item.key)}
                   />
                 ))}
               </div>

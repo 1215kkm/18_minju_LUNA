@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { CartProvider } from './context/CartContext'
 import Layout from './components/layout/Layout'
 import HeroSection from './components/sections/HeroSection'
 import Section01 from './components/sections/Section01'
@@ -12,7 +13,7 @@ import HighlighterShopPage from './components/pages/HighlighterShopPage'
 import BrandPage from './components/pages/BrandPage'
 import CartPage from './components/pages/CartPage'
 
-function App() {
+function AppRoutes() {
   const [hash, setHash] = useState(window.location.hash)
 
   useEffect(() => {
@@ -21,29 +22,12 @@ function App() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
-  if (hash.includes('#/product')) {
-    return <ProductDetailPage />
-  }
-
-  if (hash === '#/shop' || hash.startsWith('#/shop/')) {
-    return <HighlighterShopPage />
-  }
-
-  if (hash === '#/login') {
-    return <LoginPage />
-  }
-
-  if (hash === '#/signup') {
-    return <SignupPage />
-  }
-
-  if (hash === '#/brand') {
-    return <BrandPage />
-  }
-
-  if (hash === '#/cart') {
-    return <CartPage />
-  }
+  if (hash.includes('#/product')) return <ProductDetailPage />
+  if (hash === '#/shop' || hash.startsWith('#/shop/')) return <HighlighterShopPage />
+  if (hash === '#/login') return <LoginPage />
+  if (hash === '#/signup') return <SignupPage />
+  if (hash === '#/brand') return <BrandPage />
+  if (hash === '#/cart') return <CartPage />
 
   return (
     <Layout>
@@ -53,6 +37,14 @@ function App() {
       <FullTitleSection />
       <BestCollectionSection />
     </Layout>
+  )
+}
+
+function App() {
+  return (
+    <CartProvider>
+      <AppRoutes />
+    </CartProvider>
   )
 }
 
