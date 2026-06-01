@@ -3,6 +3,12 @@ import { useCart } from '../../context/CartContext'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
 import moonVeilFront from '../../assets/images/shop/balm_h01.webp'
+import moonVeilTax from '../../assets/images/sub/Moon Veil_tax.png'
+import moonVeilDetail from '../../assets/images/sub/Moon Veil_detail.png'
+import pearlVeilDetail from '../../assets/images/sub/Pearl Veil_detail.png'
+import lilacGlowDetail from '../../assets/images/sub/Lilac Glow_detail.png'
+import pinkAuraDetail from '../../assets/images/sub/Pink Aura_detail.png'
+import blueHazeDetail from '../../assets/images/sub/Blue Haze_detail.png'
 import pearlVeilMain from '../../assets/images/sub/pearl-veil-main-front_rbg.webp'
 import pearlVeilSub from '../../assets/images/sub/pearl-veil-main-generated_rbg.webp'
 import pearlVeilParticle from '../../assets/images/sub/pearl-veil-particle-detail.webp'
@@ -49,18 +55,14 @@ const products = {
         image: moonVeilFront,
       },
       {
-        label: 'Angle',
-        caption: '달빛처럼 맑은 아이보리 펄과 투명 케이스의 입체감',
-        image: pearlVeilSub,
-      },
-      {
         label: 'Detail',
         caption: '고운 샴페인 펄 입자와 촉촉한 소프트 글로우 텍스쳐',
-        image: pearlVeilParticle,
+        image: moonVeilTax,
       },
     ],
     textureImage: pearlVeilTexture,
     textureImageClass: 'max-w-[440px] lg:max-w-[500px]',
+    skinImage: moonVeilDetail,
     cardImage: moonVeilFront,
   },
   'pearl-veil': {
@@ -103,6 +105,7 @@ const products = {
     ],
     textureImage: pearlVeilTexture,
     textureImageClass: 'max-w-[440px] lg:max-w-[500px]',
+    skinImage: pearlVeilDetail,
     cardImage: pearlVeilMain,
     relatedImageClass: 'scale-[1.12]',
   },
@@ -146,6 +149,7 @@ const products = {
     ],
     textureImage: lilacGlowTexture,
     textureImageClass: 'max-w-[300px]',
+    skinImage: lilacGlowDetail,
     cardImage: lilacGlowFront,
   },
   'pink-aura': {
@@ -188,6 +192,7 @@ const products = {
     ],
     textureImage: pinkAuraTexture,
     textureImageClass: 'max-w-[300px]',
+    skinImage: pinkAuraDetail,
     cardImage: pinkAuraFront,
   },
   'blue-haze': {
@@ -230,6 +235,7 @@ const products = {
     ],
     textureImage: blueHazeTexture,
     textureImageClass: 'max-w-[300px]',
+    skinImage: blueHazeDetail,
     cardImage: blueHazeFront,
   },
 }
@@ -299,7 +305,7 @@ function ProductGallery({ product }) {
         <p className="mb-2 font-pretendard text-[11px] font-light leading-[1.55] text-[#8c8496]">
           {activeItem.caption}
         </p>
-        <div className="grid grid-cols-3 gap-3">
+        <div className={`grid gap-3 ${product.gallery.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
           {product.gallery.map((item, index) => (
             <button
               key={item.label}
@@ -482,40 +488,51 @@ function ProductDetailPage() {
           </div>
         </section>
 
-        <section
-          className="mx-auto mt-12 grid max-w-[1240px] items-center gap-10 px-0 py-12 md:px-6 lg:min-h-[400px] lg:grid-cols-[minmax(360px,520px)_minmax(420px,560px)] lg:justify-center lg:gap-16 lg:px-10"
-          style={{ background: textureSectionBackgrounds[product.slug] ?? detailSurface }}
-        >
-          <div className="flex justify-center">
-            <img
-              src={product.textureImage}
-              alt={`${product.name} texture`}
-              loading="lazy"
-              decoding="async"
-              className={`w-full object-contain ${product.textureImageClass}`}
-            />
-          </div>
-
-          <dl className="w-full max-w-[560px]">
-            <div className="pb-8">
-              <dt className="font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
-                How to use
-              </dt>
-              <dd className="mt-3 font-pretendard text-[13px] font-light leading-[1.7] text-[#6b6472]">
-                {product.howTo}
-              </dd>
+        <section className="mx-auto mt-8 max-w-[1240px] overflow-hidden md:mt-12">
+          <div className="flex flex-col lg:flex-row">
+            <div className="relative w-full shrink-0 overflow-hidden lg:w-[35%]">
+              <img
+                src={product.skinImage}
+                alt={`${product.name} on skin`}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] h-full w-full object-cover sm:aspect-[3/2] lg:aspect-[3/4] lg:h-auto"
+              />
             </div>
-            <InfoRow label="Active">
-              {product.active.map((item) => (
-                <span key={item}>
-                  {item}
-                  <br />
-                </span>
-              ))}
-            </InfoRow>
-            <InfoRow label="Finish">{product.finish}</InfoRow>
-            <InfoRow label="Mood">{product.mood}</InfoRow>
-          </dl>
+
+            <div
+              className="flex w-full flex-col justify-center px-5 py-8 sm:px-8 sm:py-10 lg:px-20 lg:py-16"
+              style={{ background: textureSectionBackgrounds[product.slug] ?? detailSurface }}
+            >
+              <p className="mb-2 font-pretendard text-[10px] font-medium uppercase tracking-[0.18em] text-[#9a93a5]">
+                Texture
+              </p>
+              <p className="mb-6 font-pretendard text-[16px] font-light leading-[1.65] text-[#2d2932] sm:text-[18px] lg:mb-10 lg:max-w-[420px] lg:text-[20px]">
+                {product.textureText}
+              </p>
+
+              <dl className="w-full lg:max-w-[480px]">
+                <div className="pb-8">
+                  <dt className="font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
+                    How to use
+                  </dt>
+                  <dd className="mt-3 font-pretendard text-[13px] font-light leading-[1.7] text-[#6b6472]">
+                    {product.howTo}
+                  </dd>
+                </div>
+                <InfoRow label="Active">
+                  {product.active.map((item) => (
+                    <span key={item}>
+                      {item}
+                      <br />
+                    </span>
+                  ))}
+                </InfoRow>
+                <InfoRow label="Finish">{product.finish}</InfoRow>
+                <InfoRow label="Mood">{product.mood}</InfoRow>
+              </dl>
+            </div>
+          </div>
         </section>
 
         <section className="mx-auto max-w-[1120px] pt-14">

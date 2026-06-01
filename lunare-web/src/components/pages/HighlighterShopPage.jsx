@@ -14,6 +14,8 @@ import lilacGlowFront from '../../assets/images/sub/lilac-glow-front_rbg.webp'
 import pinkAuraFront from '../../assets/images/sub/pink-aura-front_rbg.webp'
 import blueHazeFront from '../../assets/images/sub/blue-haze-front_rbg.webp'
 
+const detailPageIds = new Set(['moon-veil', 'pearl-veil', 'lilac-glow', 'pink-aura', 'blue-haze'])
+
 const categories = [
   { label: 'New', path: '#/shop/new', key: 'new' },
   { label: 'Best Sellers', path: '#/shop/best-sellers', key: 'best-sellers' },
@@ -277,7 +279,7 @@ function ProductCard({ product }) {
         +
       </button>
 
-      <a href={`#/product/${product.id}`} className="block pt-12">
+      <a href={detailPageIds.has(product.id) ? `#/product/${product.id}` : undefined} className="block pt-12" style={detailPageIds.has(product.id) ? {} : { cursor: 'default', pointerEvents: 'none' }}>
         <div className="relative mx-auto mb-7 flex h-[252px] w-full max-w-[220px] items-center justify-center overflow-hidden">
           <img
             src={product.image}
