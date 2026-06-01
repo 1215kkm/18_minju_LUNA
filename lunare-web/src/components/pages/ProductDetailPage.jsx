@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Header from '../layout/Header'
 import Footer from '../layout/Footer'
+import { useCart } from '../../context/CartContext'
 import moonVeilFront from '../../assets/images/shop/balm_h01.webp'
 import pearlVeilMain from '../../assets/images/sub/pearl-veil-main-front_rbg.webp'
 import pearlVeilSub from '../../assets/images/sub/pearl-veil-main-generated_rbg.webp'
@@ -26,6 +27,7 @@ const products = {
     nameKo: '문 베일',
     weeklyText: '달빛이 부드럽게\n피부 위에 머무는 순간',
     price: '$21',
+    priceKRW: 28000,
     size: '6.5 g / 0.22 oz',
     shade: '#F0EDF5',
     type: 'Highlighter balm',
@@ -68,6 +70,7 @@ const products = {
     nameKo: '펄 베일',
     weeklyText: '달빛이 가장 먼저\n피부에 내려앉는 순간',
     price: '$21',
+    priceKRW: 28000,
     size: '6.5 g / 0.22 oz',
     shade: '#F0EDF5',
     type: 'Pearl balm',
@@ -111,6 +114,7 @@ const products = {
     nameKo: '라일락 글로우',
     weeklyText: '차가운 라벤더 빛이\n피부 위에 스며드는 시간',
     price: '$24',
+    priceKRW: 32000,
     size: '6.5 g / 0.22 oz',
     shade: '#E8E4F2',
     type: 'Light base',
@@ -153,6 +157,7 @@ const products = {
     nameKo: '핑크 오라',
     weeklyText: '얼어붙은 오로라처럼\n투명하게 빛나는 핑크',
     price: '$19',
+    priceKRW: 25000,
     size: '6.5 g / 0.22 oz',
     shade: '#F5E8EF',
     type: 'Soft tint',
@@ -195,6 +200,7 @@ const products = {
     nameKo: '블루 헤이즈',
     weeklyText: '새벽 공기의 푸른\n고요한 광채',
     price: '$22',
+    priceKRW: 29000,
     size: '6.5 g / 0.22 oz',
     shade: '#E4ECF5',
     type: 'Clear highlighter',
@@ -339,14 +345,81 @@ function InfoRow({ label, children }) {
   )
 }
 
+function AddedToCartModal({ product, shade, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [onClose])
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/30 sm:items-center"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-[420px] rounded-t-[12px] bg-[#fbfafc] p-6 sm:rounded-[10px]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="mb-5 flex items-center gap-4">
+          <div className="flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-[6px] bg-[#f7f4f8]">
+            <img
+              src={product.cardImage}
+              alt={product.name}
+              className="max-h-[76%] max-w-[70%] object-contain"
+            />
+          </div>
+          <div>
+            <p className="font-pretendard text-[9px] font-light uppercase tracking-[0.22em] text-[#9a93a5]">
+              장바구니에 담겼습니다
+            </p>
+            <p className="mt-1 font-didot text-[20px] font-normal leading-none text-[#2a2630]">
+              {product.name}
+            </p>
+            <p className="mt-1.5 font-pretendard text-[11px] font-light text-[#8d8596]">{shade}</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            className="h-[44px] rounded-[5px] border border-[#ded8e5] font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]"
+          >
+            계속 쇼핑
+          </button>
+          <a
+            href="#/cart"
+            onClick={() => { window.scrollTo(0, 0); onClose() }}
+            className="flex h-[44px] items-center justify-center rounded-[5px] bg-[#29252d] font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80"
+          >
+            장바구니 보기
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ProductDetailPage() {
   const [product, setProduct] = useState(() => findProductByPath())
+  const [selectedSwatchIndex, setSelectedSwatchIndex] = useState(0)
+  const [cartModal, setCartModal] = useState(false)
+  const { addItem } = useCart()
 
   useEffect(() => {
-    const onHashChange = () => setProduct(findProductByPath())
+    const onHashChange = () => {
+      setProduct(findProductByPath())
+      setSelectedSwatchIndex(0)
+    }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
+
+  const handleAddToCart = () => {
+    addItem(product, product.swatches[selectedSwatchIndex])
+    setCartModal(true)
+  }
 
   const relatedItems = newItemSlugs
     .map((slug) => products[slug])
@@ -388,10 +461,10 @@ function ProductDetailPage() {
 
             <div className="mb-7 flex gap-11 font-pretendard text-[11px] text-[#6d6676]">
               {product.swatches.map((swatch, index) => (
-                <label key={swatch} className="flex items-center gap-3">
+                <label key={swatch} className="flex cursor-pointer items-center gap-3" onClick={() => setSelectedSwatchIndex(index)}>
                   <span
-                    className={`h-3 w-3 rounded-full border ${
-                      index === 0 ? 'border-[#2a2630] bg-[#2a2630]' : 'border-[#bbb2c8] bg-transparent'
+                    className={`h-3 w-3 rounded-full border transition-colors ${
+                      index === selectedSwatchIndex ? 'border-[#2a2630] bg-[#2a2630]' : 'border-[#bbb2c8] bg-transparent'
                     }`}
                   />
                   {swatch}
@@ -400,7 +473,11 @@ function ProductDetailPage() {
             </div>
 
             <div className="mb-7 grid grid-cols-2 gap-4">
-              <button className="h-[48px] rounded-[5px] bg-[#29252d] font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="h-[48px] rounded-[5px] bg-[#29252d] font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-80"
+              >
                 Add to cart
               </button>
               <button className="h-[48px] rounded-[5px] border border-[#ded8e5] bg-white/55 font-pretendard text-[10px] font-medium uppercase tracking-[0.08em] text-[#3a3540] transition-colors hover:bg-[#f4f0f8]">
@@ -487,6 +564,14 @@ function ProductDetailPage() {
         </section>
       </main>
       <Footer compact />
+
+      {cartModal && (
+        <AddedToCartModal
+          product={product}
+          shade={product.swatches[selectedSwatchIndex]}
+          onClose={() => setCartModal(false)}
+        />
+      )}
     </div>
   )
 }
