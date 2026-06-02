@@ -16,10 +16,10 @@ export const ITEMS = [
 ]
 
 export const BEST_COLLECTION = [
-  { id: '01', name: 'MOON VEIL',   nameKo: '문 베일',   type: 'HIGHLIGHTER BALM',    typeKo: '하이라이터 밤' },
-  { id: '02', name: 'LUCENT VEIL', nameKo: '루센트 베일', type: 'GLOW BASE',           typeKo: '글로우 베이스' },
-  { id: '03', name: 'AURA MELT',   nameKo: '오라 멜트',  type: 'MULT BALM',           typeKo: '멀티 밤' },
-  { id: '04', name: 'PRISM DROP',  nameKo: '프리즘 드롭', type: 'LIQUID HIGHLIGHTER',  typeKo: '리퀴드 하이라이터' },
+  { id: '01', name: 'MOON VEIL',   nameKo: '문 베일',   type: 'HIGHLIGHTER BALM',    typeKo: '하이라이터 밤',  slug: 'moon-veil' },
+  { id: '02', name: 'LUCENT VEIL', nameKo: '루센트 베일', type: 'GLOW BASE',           typeKo: '글로우 베이스', slug: 'moon-veil' },
+  { id: '03', name: 'AURA MELT',   nameKo: '오라 멜트',  type: 'MULT BALM',           typeKo: '멀티 밤',      slug: 'moon-veil' },
+  { id: '04', name: 'PRISM DROP',  nameKo: '프리즘 드롭', type: 'LIQUID HIGHLIGHTER',  typeKo: '리퀴드 하이라이터', slug: 'moon-veil' },
 ]
 
 export const FOOTER_LINKS = {

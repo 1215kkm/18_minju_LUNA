@@ -21,7 +21,7 @@ export function CartProvider({ children }) {
           nameKo: product.nameKo,
           type: product.type,
           shade,
-          price: product.priceKRW,
+          price: typeof product.priceKRW === 'number' ? product.priceKRW : parseInt((product.price ?? '0').replace(/[^0-9]/g, ''), 10),
           quantity: 1,
           image: product.cardImage,
           imageClass: product.relatedImageClass ?? '',
