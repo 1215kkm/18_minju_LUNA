@@ -54,9 +54,10 @@ function BestCollectionSection() {
           {BEST_COLLECTION.map((item, i) => (
             <li
               key={item.id}
-              className="flex items-start gap-12 cursor-pointer py-5"
+              className="py-5"
               onMouseEnter={() => handleMouseEnter(i)}
             >
+            <a href={`#/product/${item.slug}`} className="flex items-start gap-12 w-full">
               <span className={`font-pretendard text-[14px] font-light w-8 flex-shrink-0 mt-1 transition-colors duration-300 ${
                 activeIdx === i ? 'text-[#5a5560]' : 'text-[#ccc8d4]'
               }`}>
@@ -86,6 +87,7 @@ function BestCollectionSection() {
                   {item.typeKo}
                 </p>
               </div>
+            </a>
             </li>
           ))}
         </ul>

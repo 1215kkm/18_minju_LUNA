@@ -4,7 +4,8 @@
     {
       "name": "lunare-web",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "lunare-web"],
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "lunare-web",
       "port": 5173
     }
   ]
