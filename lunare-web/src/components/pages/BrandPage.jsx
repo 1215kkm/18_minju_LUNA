@@ -65,8 +65,8 @@ function BrandPage() {
                 Our Story
               </h1>
 
-              <div className="mt-7 space-y-5 font-pretendard text-[11.5px] font-light leading-[1.9] text-[#2e2b33] sm:text-[12px] lg:mt-8">
-                <p className="text-[12px] font-normal text-[#1e1b22] sm:text-[12.5px]">
+              <div className="mt-7 space-y-5 font-pretendard text-[14px] font-light leading-[1.9] text-[#2e2b33] sm:text-[15px] lg:mt-8 lg:text-[15px]">
+                <p className="text-[15px] font-normal text-[#1e1b22] sm:text-[15.5px]">
                   LUNARÉ는 빛이 피부 위에서 가장 아름답게 표현되는 순간에 집중합니다.
                 </p>
 
