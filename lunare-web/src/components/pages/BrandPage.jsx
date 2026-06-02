@@ -83,7 +83,7 @@ function BrandPage() {
 
               <a
                 href="#/shop/all"
-                className="mt-8 inline-flex h-[42px] items-center justify-center rounded-[5px] bg-[#17141a] px-8 font-pretendard text-[10px] font-medium uppercase tracking-[0.12em] text-white transition-opacity hover:opacity-75"
+                className="mt-8 inline-flex h-[46px] items-center justify-center rounded-[5px] bg-[#17141a] px-9 font-pretendard text-[12px] font-medium uppercase tracking-[0.12em] text-white transition-opacity hover:opacity-75"
               >
                 컬렉션 보러가기
               </a>
