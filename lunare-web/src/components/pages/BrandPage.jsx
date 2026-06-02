@@ -4,16 +4,8 @@ import brandImg from '../../assets/images/brand/brand_img.webp'
 import brandBg from '../../assets/images/brand/brand_bg.webp'
 
 const bodyBlocks = [
-  `우리는 화려한 글리터나 과장된 광채가 아닌,
-피부 본연의 결을 살리면서 자연스럽게 스며드는 빛을 연구해왔습니다.
-달빛이 모든 것을 은은하게 비추듯,
-LUNARÉ의 제품은 피부 위에 얇고 섬세한 광채를 더해 본연의 아름다움을 더욱 돋보이게 합니다.`,
-  `하이라이터는 단순히 얼굴의 특정 부위를 밝히는 메이크업 제품이 아닙니다.
-빛을 활용해 피부에 입체감을 부여하고, 자신만의 분위기와 무드를 완성하는 하나의 표현 방식입니다.`,
-  `LUNARÉ는 이러한 철학을 바탕으로 투명한 텍스처와 섬세한 반사광,
-피부에 자연스럽게 녹아드는 포뮬러를 개발하며 새로운 광채의 기준을 제안합니다.
-달빛에서 영감을 받은 은은한 반사광, 유리처럼 맑은 윤기, 그리고 피부와 하나가 되는 자연스러운 광채.
-우리는 빛이 가진 가장 아름다운 순간을 피부 위에 담아내기 위해 끊임없이 연구합니다.`,
+  `우리는 화려한 글리터나 과장된 광채가 아닌, 피부 본연의 결을 살리면서 자연스럽게 스며드는 빛을 연구해왔습니다. 달빛이 모든 것을 은은하게 비추듯, LUNARÉ의 제품은 피부 위에 얇고 섬세한 광채를 더해 본연의 아름다움을 더욱 돋보이게 합니다.`,
+  `LUNARÉ는 투명한 텍스처와 섬세한 반사광, 피부에 자연스럽게 녹아드는 포뮬러로 새로운 광채의 기준을 제안합니다. 달빛에서 영감을 받은 은은한 반사광, 유리처럼 맑은 윤기, 그리고 피부와 하나가 되는 자연스러운 광채. 우리는 빛이 가진 가장 아름다운 순간을 피부 위에 담아내기 위해 끊임없이 연구합니다.`,
 ]
 
 function BrandPage() {
@@ -65,18 +57,21 @@ function BrandPage() {
                 Our Story
               </h1>
 
-              <div className="mt-7 space-y-5 font-pretendard text-[14px] font-light leading-[1.9] text-[#2e2b33] sm:text-[15px] lg:mt-8 lg:text-[15px]">
-                <p className="text-[15px] font-normal text-[#1e1b22] sm:text-[15.5px]">
+              <div className="mt-8 font-pretendard">
+                {/* 리드 문장 */}
+                <p className="text-[17px] font-medium leading-[1.75] text-[#1e1b22] sm:text-[18px]">
                   LUNARÉ는 빛이 피부 위에서 가장 아름답게 표현되는 순간에 집중합니다.
                 </p>
 
-                {bodyBlocks.map((block) => (
-                  <p key={block} className="whitespace-pre-line">
-                    {block}
-                  </p>
-                ))}
+                {/* 본문 */}
+                <div className="mt-6 space-y-5 text-[14px] font-light leading-[1.95] text-[#3a3640] sm:text-[14.5px]">
+                  {bodyBlocks.map((block) => (
+                    <p key={block}>{block}</p>
+                  ))}
+                </div>
 
-                <p className="border-t border-[#a09ab0]/40 pt-5">
+                {/* 클로징 */}
+                <p className="mt-8 border-t border-[#a09ab0]/40 pt-6 text-[13px] font-light leading-[1.85] tracking-[0.01em] text-[#5a5565] sm:text-[13.5px]">
                   LUNARÉ는 단순히 메이크업을 만드는 브랜드가 아닙니다. 빛을 통해 자신만의 아름다움을 발견하고 표현할 수 있도록 돕는 스킨 글로우 뷰티 브랜드입니다.
                 </p>
               </div>

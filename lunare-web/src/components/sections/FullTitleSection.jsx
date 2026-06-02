@@ -38,9 +38,9 @@ function FullTitleSection() {
         <div>
           <a
             href="#/brand"
-            className="font-pretendard inline-flex items-center justify-center bg-[#1a1a1a] text-white text-[13px] tracking-[0.08em] font-light rounded-full px-7 py-3 hover:bg-[#3a3540] transition-colors duration-300"
+            className="font-pretendard inline-flex items-center justify-center bg-[#1a1a1a] text-white text-[15px] tracking-[0.08em] font-light rounded-full px-8 py-3 hover:bg-[#3a3540] transition-colors duration-300"
           >
-            discover
+            Discover
           </a>
         </div>
       </div>
