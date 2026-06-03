@@ -288,8 +288,8 @@ function ProductCard({ product }) {
         +
       </button>
 
-      <a href={detailPageIds.has(product.id) ? `#/product/${detailPageIds.get(product.id)}` : undefined} className="block pt-12" style={detailPageIds.has(product.id) ? {} : { cursor: 'default', pointerEvents: 'none' }}>
-        <div className="relative mx-auto mb-7 flex h-[252px] w-full max-w-[220px] items-center justify-center overflow-hidden">
+      <a href={detailPageIds.has(product.id) ? `#/product/${detailPageIds.get(product.id)}` : undefined} className="block pt-10 md:pt-12" style={detailPageIds.has(product.id) ? {} : { cursor: 'default', pointerEvents: 'none' }}>
+        <div className="relative mx-auto mb-5 md:mb-7 flex h-[160px] md:h-[252px] w-full max-w-[160px] md:max-w-[220px] items-center justify-center overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
@@ -302,14 +302,14 @@ function ProductCard({ product }) {
         </div>
 
         <div className="text-center">
-          <p className="font-pretendard text-[15px] font-light uppercase tracking-[0.16em] text-[#2d2832]">
+          <p className="font-pretendard text-[12px] md:text-[15px] font-light uppercase tracking-[0.12em] md:tracking-[0.16em] text-[#2d2832]">
             {product.name}
           </p>
-          <p className="mt-2 font-pretendard text-[13px] font-light text-[#8d8596]">{product.nameKo}</p>
-          <p className="mt-3 font-pretendard text-[12px] font-light uppercase tracking-[0.12em] text-[#aaa3b1]">
+          <p className="mt-1.5 md:mt-2 font-pretendard text-[11px] md:text-[13px] font-light text-[#8d8596]">{product.nameKo}</p>
+          <p className="mt-2 md:mt-3 font-pretendard text-[10px] md:text-[12px] font-light uppercase tracking-[0.1em] md:tracking-[0.12em] text-[#aaa3b1] hidden md:block">
             {product.category}
           </p>
-          <p className="mt-3 font-pretendard text-[15px] font-light text-[#2d2832]">{product.price}</p>
+          <p className="mt-2 md:mt-3 font-pretendard text-[13px] md:text-[15px] font-light text-[#2d2832]">{product.price}</p>
         </div>
       </a>
     </article>
@@ -328,19 +328,19 @@ function HighlighterShopPage() {
         <ShopHero activePage={activePage} copy={copy} />
 
         <section className="mx-auto max-w-[1440px] px-5 pb-24 pt-14 md:px-10 md:pt-18">
-          <div className="mb-14 grid grid-cols-[1fr_auto_1fr] items-center font-pretendard">
-            <button className="justify-self-start text-[13px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
+          <div className="mb-10 md:mb-14 grid grid-cols-[1fr_auto_1fr] items-center font-pretendard">
+            <button className="justify-self-start text-[12px] md:text-[13px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
               Filter by ▾
             </button>
-            <h2 className="font-didot text-[30px] font-normal text-[#2c2731] md:text-[36px]">
+            <h2 className="font-didot text-[24px] md:text-[30px] lg:text-[36px] font-normal text-[#2c2731]">
               {copy.heading}
             </h2>
-            <button className="justify-self-end text-[13px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
+            <button className="justify-self-end text-[12px] md:text-[13px] font-light text-[#2d2832] transition-opacity hover:opacity-50">
               Sort by ▾
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-7 gap-y-18 md:grid-cols-4 md:gap-x-9 lg:gap-x-12">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-9 md:gap-y-18 lg:gap-x-12">
             {visibleProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

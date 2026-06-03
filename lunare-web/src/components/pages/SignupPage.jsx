@@ -32,14 +32,14 @@ function SignupPage() {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* 로고 — 좌상단 */}
-      <div className="absolute top-9 left-10 z-10">
+      <div className="absolute top-6 left-6 md:top-9 md:left-10 z-10">
         <a href="#" onClick={() => { window.location.hash = ''; window.scrollTo(0, 0) }}>
           <img src={smallLogo} alt="LUNARÉ" className="h-[26px] object-contain" style={{ filter: 'brightness(0) invert(1)' }} />
         </a>
       </div>
 
       {/* 박스 */}
-      <div className="relative z-10 w-full max-w-[620px] mx-6 bg-white/90 backdrop-blur-md px-16 py-16">
+      <div className="relative z-10 w-full max-w-[620px] mx-4 md:mx-6 bg-white/90 backdrop-blur-md px-8 py-12 md:px-16 md:py-16">
 
         <button
           type="button"
@@ -170,7 +170,7 @@ function SignupPage() {
       </div>
 
       {/* 하단 카피라이트 */}
-      <div className="absolute bottom-7 left-10 z-10">
+      <div className="absolute bottom-5 left-6 md:bottom-7 md:left-10 z-10">
         <p className="font-pretendard text-[12px] font-light text-white/35">
           © 2025 LUNARÉ. All rights reserved.
         </p>

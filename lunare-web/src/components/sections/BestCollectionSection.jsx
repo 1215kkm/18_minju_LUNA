@@ -40,8 +40,8 @@ function BestCollectionSection() {
       style={{ background: '#FDFDFD' }}
     >
       {/* 타이틀 — 리스트 위 독립 배치 */}
-      <div className="pl-16 md:pl-24 lg:pl-32 xl:pl-40 mb-12">
-        <h2 className="font-didot text-[30px] md:text-[36px] font-normal text-[#1a1a1a] leading-[1.1]">
+      <div className="pl-8 md:pl-16 lg:pl-32 xl:pl-40 mb-8 md:mb-12">
+        <h2 className="font-didot text-[26px] md:text-[30px] lg:text-[36px] font-normal text-[#1a1a1a] leading-[1.1]">
           Best<br />Collection
         </h2>
       </div>
@@ -50,14 +50,15 @@ function BestCollectionSection() {
       <div className="flex items-stretch">
 
         {/* 좌측 리스트 */}
-        <ul className="flex flex-col justify-between pl-24 md:pl-36 lg:pl-48 xl:pl-56 pr-8 w-[50%]" onMouseLeave={handleMouseLeave}>
+        <ul className="flex flex-col justify-between pl-8 md:pl-24 lg:pl-36 xl:pl-56 pr-4 md:pr-8 w-full md:w-[50%]" onMouseLeave={handleMouseLeave}>
           {BEST_COLLECTION.map((item, i) => (
             <li
               key={item.id}
-              className="py-5"
+              className="py-4 md:py-5"
               onMouseEnter={() => handleMouseEnter(i)}
+              onClick={() => setActiveIdx(i)}
             >
-            <a href={`#/product/${item.slug}`} className="flex items-start gap-12 w-full">
+            <a href={`#/product/${item.slug}`} className="flex items-start gap-6 md:gap-12 w-full">
               <span className={`font-pretendard text-[14px] font-light w-8 flex-shrink-0 mt-1 transition-colors duration-300 ${
                 activeIdx === i ? 'text-[#5a5560]' : 'text-[#ccc8d4]'
               }`}>
@@ -92,7 +93,7 @@ function BestCollectionSection() {
           ))}
         </ul>
 
-        {/* 우측 이미지 — 좌측과 동일 높이, 오른쪽 끝까지 꽉 채움 */}
+        {/* 우측 이미지 — 데스크탑만 표시 */}
         <div className="hidden md:block flex-1 relative overflow-hidden" style={{ background: '#FDFDFD' }}>
           {DETAIL_IMGS.map((src, i) => (
             <img

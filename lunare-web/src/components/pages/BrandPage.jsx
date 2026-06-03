@@ -29,7 +29,7 @@ function BrandPage() {
           </div>
 
           {/* 텍스트 */}
-          <div className="relative flex min-h-[calc(100vh-var(--header-h))] items-center overflow-hidden bg-[#c6c0d0] px-8 py-20 sm:px-14 md:px-20 lg:min-h-0 lg:px-[7vw] lg:py-[10vh]">
+          <div className="relative flex min-h-[calc(100vh-var(--header-h))] items-center overflow-hidden bg-[#c6c0d0] px-6 py-14 sm:px-14 sm:py-20 md:px-20 lg:min-h-0 lg:px-[7vw] lg:py-[10vh]">
             {/* 배경 텍스처 — opacity 낮춤 */}
             <img
               src={brandBg}
@@ -53,7 +53,7 @@ function BrandPage() {
               <p className="mb-6 font-pretendard text-[9px] font-light uppercase tracking-[0.32em] text-[#4a4460]/70">
                 Brand Story
               </p>
-              <h1 className="font-didot text-[36px] font-normal leading-none text-[#17141a] sm:text-[44px] lg:text-[52px]">
+              <h1 className="font-didot text-[32px] font-normal leading-none text-[#17141a] sm:text-[44px] lg:text-[52px]">
                 Our Story
               </h1>
 

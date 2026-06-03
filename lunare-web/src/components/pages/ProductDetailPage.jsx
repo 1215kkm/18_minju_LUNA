@@ -342,11 +342,11 @@ function ProductGallery({ product }) {
 
 function InfoRow({ label, children }) {
   return (
-    <div className="grid grid-cols-[112px_1fr] border-t border-[#ded8e5] py-3.5 text-[12px] leading-[1.65] text-[#5a5562]">
-      <dt className="font-pretendard text-[11px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
+    <div className="grid grid-cols-[90px_1fr] md:grid-cols-[112px_1fr] border-t border-[#ded8e5] py-3 md:py-3.5 text-[12px] leading-[1.65] text-[#5a5562]">
+      <dt className="font-pretendard text-[10px] md:text-[11px] font-medium uppercase tracking-[0.08em] text-[#2d2932]">
         {label}
       </dt>
-      <dd className="font-pretendard font-light">{children}</dd>
+      <dd className="font-pretendard font-light text-[11px] md:text-[12px]">{children}</dd>
     </div>
   )
 }
@@ -425,17 +425,17 @@ function ProductDetailPage() {
     <div className="min-h-screen bg-[#fbfafc] text-[#211f24]">
       <Header tone="light" />
 
-      <main className="mx-auto w-full max-w-[1440px] px-5 pb-16 pt-[88px] md:px-8 xl:px-0">
+      <main className="mx-auto w-full max-w-[1440px] px-4 md:px-5 pb-16 pt-[78px] md:pt-[88px] md:px-8 xl:px-0">
         <section
           id="hero"
-          className="mx-auto grid min-h-[calc(100vh-88px)] max-w-[1280px] items-center gap-8 pb-20 lg:grid-cols-[minmax(0,620px)_minmax(430px,560px)] lg:justify-center lg:gap-14"
+          className="mx-auto grid max-w-[1280px] items-center gap-6 md:gap-8 pb-12 md:pb-20 lg:grid-cols-[minmax(0,620px)_minmax(430px,560px)] lg:justify-center lg:gap-14"
         >
           <ProductGallery product={product} />
 
           <div className="w-full max-w-[560px] pt-1">
-            <div className="mb-7 flex items-start justify-between gap-8">
+            <div className="mb-5 md:mb-7 flex items-start justify-between gap-6 md:gap-8">
               <div>
-                <h1 className="font-didot text-[32px] font-normal leading-none tracking-[0.01em] text-[#2a2630] md:text-[36px]">
+                <h1 className="font-didot text-[28px] md:text-[32px] lg:text-[36px] font-normal leading-none tracking-[0.01em] text-[#2a2630]">
                   {product.name}
                 </h1>
                 <p className="mt-2.5 font-pretendard text-[12px] font-light text-[#6d6676]">
@@ -536,11 +536,11 @@ function ProductDetailPage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1120px] pt-14">
-          <h2 className="mb-3 font-didot text-[26px] font-normal leading-none text-[#2a2630] md:text-[30px]">
+        <section className="mx-auto max-w-[1120px] pt-10 md:pt-14">
+          <h2 className="mb-4 md:mb-3 font-didot text-[22px] md:text-[26px] lg:text-[30px] font-normal leading-none text-[#2a2630]">
             See also
           </h2>
-          <div className="grid gap-x-7 gap-y-8 md:grid-cols-3">
+          <div className="grid grid-cols-3 gap-x-4 gap-y-6 md:gap-x-7 md:gap-y-8">
             {relatedItems.map((item) => (
               <a
                 key={item.slug}
@@ -549,7 +549,7 @@ function ProductDetailPage() {
                 className="group"
               >
                 <div
-                  className="mb-3 flex h-[150px] items-center justify-center"
+                  className="mb-2 md:mb-3 flex h-[100px] md:h-[150px] items-center justify-center"
                   style={{ background: detailSurfaceLight }}
                 >
                   <img
@@ -562,12 +562,12 @@ function ProductDetailPage() {
                     }`}
                   />
                 </div>
-                <div className="flex items-end justify-between gap-4">
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-1 md:gap-4">
                   <div>
-                    <h3 className="font-pretendard text-[14px] font-light text-[#2b2730]">{item.name}</h3>
-                    <p className="mt-1.5 font-pretendard text-[12px] font-light text-[#8e8798]">{item.type}</p>
+                    <h3 className="font-pretendard text-[12px] md:text-[14px] font-light text-[#2b2730]">{item.name}</h3>
+                    <p className="mt-1 font-pretendard text-[10px] md:text-[12px] font-light text-[#8e8798]">{item.type}</p>
                   </div>
-                  <p className="font-pretendard text-[12px] font-medium text-[#2b2730]">{item.price}</p>
+                  <p className="font-pretendard text-[11px] md:text-[12px] font-medium text-[#2b2730]">{item.price}</p>
                 </div>
               </a>
             ))}
