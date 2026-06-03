@@ -1,5 +1,41 @@
+import { useState } from 'react'
 import { FOOTER_LINKS } from '../../constants'
 import smallLogo from '../../assets/images/main/small_logo.webp'
+
+function AccordionLinkCol({ col, links }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="border-t border-white/10">
+      <button
+        type="button"
+        className="flex w-full items-center justify-between py-4 font-pretendard text-[10px] font-light uppercase tracking-[0.2em] text-white/40"
+        onClick={() => setOpen((v) => !v)}
+      >
+        {col}
+        <svg
+          width="10" height="6" viewBox="0 0 10 6" fill="none"
+          className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+        >
+          <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+        </svg>
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-300 ${open ? 'max-h-48 pb-4' : 'max-h-0'}`}
+      >
+        <ul className="flex flex-col gap-3">
+          {links.map((link) => (
+            <li key={link}>
+              <a href="#" className="font-pretendard text-[11px] font-light text-white/55 transition-colors duration-300 hover:text-white/80">
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 function Footer({ compact = false }) {
   if (compact) {
@@ -19,7 +55,14 @@ function Footer({ compact = false }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-8 md:gap-12">
+          {/* 모바일: 아코디언 / 데스크탑: 3열 그리드 */}
+          <div className="md:hidden">
+            {Object.entries(FOOTER_LINKS).map(([col, links]) => (
+              <AccordionLinkCol key={col} col={col} links={links} />
+            ))}
+            <div className="border-t border-white/10" />
+          </div>
+          <div className="hidden md:grid grid-cols-3 gap-12">
             {Object.entries(FOOTER_LINKS).map(([col, links]) => (
               <div key={col}>
                 <p className="mb-3 font-pretendard text-[9px] font-light uppercase tracking-[0.2em] text-white/25">
@@ -28,10 +71,7 @@ function Footer({ compact = false }) {
                 <ul className="flex flex-col gap-2">
                   {links.map((link) => (
                     <li key={link}>
-                      <a
-                        href="#"
-                        className="font-pretendard text-[10px] font-light transition-colors duration-300 hover:text-white/80"
-                      >
+                      <a href="#" className="font-pretendard text-[10px] font-light transition-colors duration-300 hover:text-white/80">
                         {link}
                       </a>
                     </li>
@@ -58,7 +98,7 @@ function Footer({ compact = false }) {
 
   return (
     <footer className="bg-[#6e6a85] text-white/55 px-8 md:px-12 lg:px-28 xl:px-40 pt-14 md:pt-20 pb-10">
-      <div className="flex flex-col md:flex-row gap-10 md:gap-0 justify-between mb-12 md:mb-16">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-0 justify-between mb-8 md:mb-16">
         {/* 브랜드 */}
         <div className="flex-shrink-0">
           <img src={smallLogo} alt="LUNARÉ" className="h-[15px] md:h-[17px] object-contain mb-5 md:mb-7" style={{ filter: 'brightness(0) invert(1)' }} />
@@ -68,8 +108,14 @@ function Footer({ compact = false }) {
           </p>
         </div>
 
-        {/* 링크 컬럼 */}
-        <div className="flex gap-10 md:gap-16 lg:gap-24">
+        {/* 모바일: 아코디언 / 데스크탑: 가로 배치 */}
+        <div className="md:hidden">
+          {Object.entries(FOOTER_LINKS).map(([col, links]) => (
+            <AccordionLinkCol key={col} col={col} links={links} />
+          ))}
+          <div className="border-t border-white/10" />
+        </div>
+        <div className="hidden md:flex gap-10 lg:gap-24">
           {Object.entries(FOOTER_LINKS).map(([col, links]) => (
             <div key={col}>
               <p className="font-pretendard text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.25em] text-white/25 uppercase mb-4 md:mb-6 font-light">{col}</p>
