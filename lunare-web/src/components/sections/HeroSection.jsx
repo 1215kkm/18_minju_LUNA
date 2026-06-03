@@ -61,7 +61,7 @@ function HeroSection() {
         <img
           src={logoImg}
           alt="LUNARÉ"
-          className="logo-animate w-[58vw] max-w-[1100px] mx-auto object-contain select-none"
+          className="logo-animate w-[78vw] md:w-[58vw] max-w-[1100px] mx-auto object-contain select-none"
           style={{ opacity: 0 }}
         />
       </div>

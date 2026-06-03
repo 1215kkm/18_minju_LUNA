@@ -23,13 +23,13 @@ function FullTitleSection() {
       ))}
 
       {/* 콘텐츠 — 좌하단 */}
-      <div className="relative z-10 h-full flex flex-col justify-end px-16 md:px-24 lg:px-32 pb-20">
+      <div className="relative z-10 min-h-[100svh] md:h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 xl:px-32 pb-16 md:pb-20">
         {/* GFS Didot 타이틀 */}
-        <h2 className="font-didot text-[36px] md:text-[48px] font-normal text-[#1a1a1a] tracking-[0.1em] mb-4 leading-tight">
+        <h2 className="font-didot text-[28px] md:text-[36px] lg:text-[48px] font-normal text-[#1a1a1a] tracking-[0.08em] md:tracking-[0.1em] mb-3 md:mb-4 leading-tight">
           BEYOND THE LIGHT
         </h2>
 
-        <p className="font-pretendard text-[15px] leading-[1.9] text-[#3a3540] font-light mb-7">
+        <p className="font-pretendard text-[13px] md:text-[15px] leading-[1.9] text-[#3a3540] font-light mb-6 md:mb-7">
           피부 위를 스치는 빛을 넘어<br />
           당신만의 존재감을 완성하는 새로운 광채의 경험
         </p>
@@ -38,7 +38,7 @@ function FullTitleSection() {
         <div>
           <a
             href="#/brand"
-            className="font-pretendard inline-flex items-center justify-center bg-[#1a1a1a] text-white text-[15px] tracking-[0.08em] font-light rounded-full px-8 py-3 hover:bg-[#3a3540] transition-colors duration-300"
+            className="font-pretendard inline-flex items-center justify-center bg-[#1a1a1a] text-white text-[14px] md:text-[15px] tracking-[0.08em] font-light rounded-full px-7 md:px-8 py-2.5 md:py-3 hover:bg-[#3a3540] transition-colors duration-300"
           >
             Discover
           </a>
@@ -46,7 +46,7 @@ function FullTitleSection() {
       </div>
 
       {/* 슬라이드 인디케이터 */}
-      <div className="absolute bottom-8 right-14 md:right-20 flex gap-2 z-10">
+      <div className="absolute bottom-6 md:bottom-8 right-8 md:right-14 lg:right-20 flex gap-2 z-10">
         {SLIDES.map((_, i) => (
           <span
             key={i}

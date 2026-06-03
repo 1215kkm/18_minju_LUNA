@@ -59,10 +59,10 @@ function QuantityControl({ value, onDecrease, onIncrease, atMax }) {
 
 function CartItem({ item, onDecrease, onIncrease, onRemove }) {
   return (
-    <article className="grid gap-5 border-t border-[#ded8e5] py-6 md:grid-cols-[132px_1fr_auto] md:items-center md:gap-8">
+    <article className="flex gap-4 border-t border-[#ded8e5] py-5 md:grid md:grid-cols-[132px_1fr_auto] md:items-center md:gap-8">
       <a
         href={`#/product/${item.id}`}
-        className="flex h-[132px] w-full max-w-[350px] items-center justify-center rounded-[5px] bg-[#f7f4f8] md:w-[132px]"
+        className="flex h-[100px] w-[100px] shrink-0 items-center justify-center rounded-[5px] bg-[#f7f4f8] md:h-[132px] md:w-[132px]"
       >
         <img
           src={item.image}
@@ -200,7 +200,7 @@ function CartPage() {
                   <p className="mb-3 font-pretendard text-[9px] font-light uppercase tracking-[0.28em] text-[#8f8799]">
                     Shopping Bag
                   </p>
-                  <h1 className="max-w-[340px] font-didot text-[32px] font-normal leading-[1.08] text-[#2c2731] md:max-w-none md:text-[46px]">
+                  <h1 className="max-w-[280px] font-didot text-[26px] font-normal leading-[1.08] text-[#2c2731] md:max-w-none md:text-[32px] lg:text-[46px]">
                     A quiet edit of glow.
                   </h1>
                 </div>

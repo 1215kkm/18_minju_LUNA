@@ -38,21 +38,21 @@ function Section01() {
   return (
     <section
       id="about"
-      className="snap-section flex"
+      className="snap-section flex flex-col md:flex-row"
       style={{ background: '#FDFDFD' }}
     >
-      {/* 좌측 텍스트 */}
-      <div className="w-full md:w-1/2 flex flex-col items-center justify-end text-center px-16 md:px-24 lg:px-32 pb-[178px]">
-        <h2 className="font-didot text-[24px] md:text-[28px] lg:text-[32px] font-normal text-[#1a1a1a] tracking-[0.04em] mb-4 leading-snug">
+      {/* 텍스트 — 모바일: flex-1로 남은 공간 채움, 데스크탑: 좌측 하단 */}
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-center md:justify-end text-center px-8 md:px-16 lg:px-24 xl:px-32 pt-16 pb-10 md:pt-0 md:pb-[178px]">
+        <h2 className="font-didot text-[22px] md:text-[28px] lg:text-[32px] font-normal text-[#1a1a1a] tracking-[0.04em] mb-4 leading-snug">
           Light, In Its Softest Form
         </h2>
-        <p className="font-didot text-[12px] leading-[2] text-[#888190] font-normal max-w-[420px]">
+        <p className="font-didot text-[12px] leading-[2] text-[#888190] font-normal max-w-[320px] md:max-w-[420px]">
           A delicate veil of radiance inspired by the quiet beauty of moonlight.
         </p>
       </div>
 
-      {/* 우측 이미지 슬라이더 */}
-      <div className="hidden md:block w-1/2 h-full relative overflow-hidden">
+      {/* 이미지 슬라이더 — 모바일: 하단 고정 높이, 데스크탑: 우측 절반 */}
+      <div className="w-full h-[52vw] md:h-auto md:w-1/2 md:flex-1 relative overflow-hidden">
         <div
           className="flex h-full"
           style={{
@@ -72,7 +72,7 @@ function Section01() {
           ))}
         </div>
         {/* 도트 인디케이터 */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-5 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
           {SLIDES.map((_, i) => (
             <span
               key={i}
