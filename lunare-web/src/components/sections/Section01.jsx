@@ -41,8 +41,8 @@ function Section01() {
       className="snap-section flex flex-col md:flex-row"
       style={{ background: '#FDFDFD' }}
     >
-      {/* 텍스트 — 모바일: 상단 세로 중앙, 데스크탑: 좌측 하단 */}
-      <div className="w-full md:w-1/2 flex flex-col items-center justify-center md:justify-end text-center px-8 md:px-16 lg:px-24 xl:px-32 pt-28 pb-10 md:pt-0 md:pb-[178px]">
+      {/* 텍스트 — 모바일: flex-1로 남은 공간 채움, 데스크탑: 좌측 하단 */}
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-center md:justify-end text-center px-8 md:px-16 lg:px-24 xl:px-32 pt-16 pb-10 md:pt-0 md:pb-[178px]">
         <h2 className="font-didot text-[22px] md:text-[28px] lg:text-[32px] font-normal text-[#1a1a1a] tracking-[0.04em] mb-4 leading-snug">
           Light, In Its Softest Form
         </h2>

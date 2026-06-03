@@ -104,4 +104,8 @@
     min-height: 100svh;
     overflow: visible;
   }
+  /* 콘텐츠가 짧은 섹션은 min-height 해제 */
+  #about {
+    min-height: auto;
+  }
 }
