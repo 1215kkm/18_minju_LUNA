@@ -39,12 +39,12 @@ function HeroSection() {
 
   return (
     <section id="hero" className="snap-section relative w-full">
-      {/* 배경 이미지 2분할 */}
+      {/* 배경 이미지 — 모바일: 단일, 데스크탑: 좌우 2분할 */}
       <div className="absolute inset-0 flex">
-        <div className="w-1/2 h-full overflow-hidden">
+        <div className="hidden md:block w-1/2 h-full overflow-hidden">
           <img src={heroLeft} alt="" className="w-full h-full object-cover object-center" fetchpriority="high" decoding="async" />
         </div>
-        <div className="w-1/2 h-full overflow-hidden">
+        <div className="w-full md:w-1/2 h-full overflow-hidden">
           <img src={heroRight} alt="" className="w-full h-full object-cover object-center" fetchpriority="high" decoding="async" />
         </div>
       </div>
