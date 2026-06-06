@@ -34,6 +34,15 @@ export function CartProvider({ children }) {
     setItems((prev) => prev.filter((i) => i.key !== key))
   }
 
+  const restoreItem = (item, index) => {
+    setItems((prev) => {
+      if (prev.some((i) => i.key === item.key)) return prev
+      const next = [...prev]
+      next.splice(Math.min(index, next.length), 0, item)
+      return next
+    })
+  }
+
   const updateQuantity = (key, direction) => {
     setItems((prev) =>
       prev.map((item) => {
@@ -46,7 +55,7 @@ export function CartProvider({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, updateQuantity }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, restoreItem, updateQuantity }}>
       {children}
     </CartContext.Provider>
   )

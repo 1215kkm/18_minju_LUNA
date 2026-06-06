@@ -157,7 +157,7 @@ function EmptyCart() {
 }
 
 function CartPage() {
-  const { items, removeItem: contextRemoveItem, updateQuantity: contextUpdateQuantity } = useCart()
+  const { items, removeItem: contextRemoveItem, restoreItem: contextRestoreItem, updateQuantity: contextUpdateQuantity } = useCart()
   const [giftWrap, setGiftWrap] = useState(false)
   const [undoTarget, setUndoTarget] = useState(null)
   const undoRef = useRef(null)
@@ -180,6 +180,7 @@ function CartPage() {
 
   const handleUndo = () => {
     if (!undoTarget) return
+    contextRestoreItem(undoTarget.item, undoTarget.index)
     setUndoTarget(null)
   }
 
