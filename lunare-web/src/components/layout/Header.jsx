@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import smallLogo from '../../assets/images/main/small_logo.webp'
 
 // 이미지(dark) 위 섹션 id 목록
@@ -22,8 +22,46 @@ const shopMenuItems = [
 function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
   const [autoDark, setAutoDark] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [menuClosing, setMenuClosing] = useState(false)
   const [shopOpen, setShopOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [hash, setHash] = useState(typeof window !== 'undefined' ? window.location.hash : '')
   const isDark = tone === 'auto' ? autoDark : tone === 'dark'
+  const isMainPage = hash === '' || hash === '#'
+
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  const prevMenuOpen = useRef(false)
+  useEffect(() => {
+    if (menuOpen) {
+      setMenuClosing(false)
+      prevMenuOpen.current = true
+      return
+    }
+    if (prevMenuOpen.current) {
+      setMenuClosing(true)
+      const t = setTimeout(() => setMenuClosing(false), 520)
+      prevMenuOpen.current = false
+      return () => clearTimeout(t)
+    }
+  }, [menuOpen])
+
+  useEffect(() => {
+    const onScroll = () => {
+      const winY = window.scrollY || 0
+      const container = document.querySelector('.snap-container')
+      const containerY = container ? container.scrollTop : 0
+      setScrolled(winY > 4 || containerY > 4)
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true, capture: true })
+    return () => window.removeEventListener('scroll', onScroll, { capture: true })
+  }, [])
 
   useEffect(() => {
     if (tone !== 'auto') return
@@ -74,30 +112,45 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
   const logoOnDark = logoTone ? logoTone === 'dark' : headerOnDark
   const logoFilter = logoOnDark ? 'brightness(0) invert(1)' : 'none'
 
+  const headerBgClass = (menuOpen || menuClosing || isMainPage)
+    ? ''
+    : scrolled
+      ? headerOnDark
+        ? 'bg-[#17141a]/45 backdrop-blur-md'
+        : 'bg-white/75 backdrop-blur-md'
+      : ''
+
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
+      className={`pointer-events-none fixed left-0 right-0 top-0 z-50 transition-colors duration-300 ${headerBgClass}`}
       style={{ height: 'var(--header-h)' }}
     >
       <div className="pointer-events-auto relative z-50 max-w-[1920px] mx-auto h-full flex items-center justify-between px-5 md:px-12">
 
         {/* 좌측 — 햄버거 + SHOP */}
-        <div className={`flex items-center gap-5 transition-colors duration-500 ${textColor}`}>
+        <div className={`flex items-center gap-7 transition-colors duration-500 ${textColor}`}>
           <button
             type="button"
             className="hover:opacity-50 transition-opacity"
-            aria-label="Menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             onClick={() => {
               setMenuOpen((open) => !open)
               setShopOpen(false)
             }}
           >
-            <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
-              <line x1="0" y1="1"  x2="22" y2="1"  stroke="currentColor" strokeWidth="1.4"/>
-              <line x1="0" y1="8"  x2="22" y2="8"  stroke="currentColor" strokeWidth="1.4"/>
-              <line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" strokeWidth="1.4"/>
-            </svg>
+            {menuOpen ? (
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <line x1="3" y1="3" x2="19" y2="19" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                <line x1="19" y1="3" x2="3" y2="19" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+            ) : (
+              <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+                <line x1="0" y1="1"  x2="22" y2="1"  stroke="currentColor" strokeWidth="1.4"/>
+                <line x1="0" y1="8"  x2="22" y2="8"  stroke="currentColor" strokeWidth="1.4"/>
+                <line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" strokeWidth="1.4"/>
+              </svg>
+            )}
           </button>
           <div className="relative">
             <button
@@ -153,7 +206,7 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
             <img
               src={smallLogo}
               alt="LUNARÉ"
-              className="h-[17px] w-auto object-contain md:h-[19px]"
+              className="h-[20px] w-auto object-contain md:h-[23px]"
               style={{ filter: logoFilter }}
             />
           </a>
@@ -179,41 +232,41 @@ function Header({ tone = 'auto', showLogo = true, rightTone, logoTone }) {
 
       </div>
 
+      {/* Click-outside backdrop (invisible, closes menu) */}
       <div
-        className={`pointer-events-auto fixed left-5 top-[calc(var(--header-h)+14px)] z-40 w-[calc(100vw-40px)] max-w-[390px] border border-[#ded8e5]/80 bg-[#fbfafc]/94 px-5 py-5 text-[#29242d] shadow-[0_22px_52px_rgba(69,60,82,0.14)] backdrop-blur-md transition-all duration-300 md:left-12 md:w-[430px] md:max-w-none md:px-7 md:py-6 ${
-          menuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-3 opacity-0'
-        }`}
-      >
-        <div className="mb-6 flex items-center justify-between border-b border-[#ded8e5] pb-4">
-          <p className="font-pretendard text-[12px] font-light uppercase tracking-[0.24em] text-[#9a93a5]">
-            LUNARÉ
-          </p>
-          <button
-            type="button"
-            className="font-pretendard text-[12px] font-light uppercase tracking-[0.18em] text-[#9a93a5] transition-colors hover:text-[#29242d]"
-            onClick={() => setMenuOpen(false)}
-          >
-            Close
-          </button>
-        </div>
+        className={`fixed inset-0 z-30 ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
+      />
 
-        <nav className="flex flex-col">
-          {mainMenuItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="group grid grid-cols-[1fr_auto] items-center gap-8 border-b border-[#ded8e5]/75 py-5 md:py-6"
-              onClick={closeMenus}
-            >
-              <span className="font-didot text-[28px] font-normal leading-none text-[#29242d] transition-transform duration-300 group-hover:translate-x-1 md:text-[32px]">
-                {item.label}
-              </span>
-              <span className="max-w-[124px] text-right font-pretendard text-[11px] font-light uppercase leading-[1.8] tracking-[0.14em] text-[#aaa3b1]">
-                {item.sub}
-              </span>
-            </a>
-          ))}
-        </nav>
+      {/* Drop column menu — narrow vertical panel, slides down from top */}
+      <div
+        className={`fixed bottom-0 left-0 top-0 z-40 w-[320px] bg-[#efebf3] shadow-[24px_0_60px_-30px_rgba(45,38,57,0.35)] transition-all duration-500 ease-out sm:w-[360px] ${
+          menuOpen
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-[100vh] opacity-0'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="px-7 pb-10 pt-[calc(var(--header-h)+4vh)] sm:px-9 sm:pb-12">
+          <nav className="flex flex-col">
+            {mainMenuItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-[#d8d2e0] py-4 transition-colors hover:border-[#7a7388] sm:py-5"
+                onClick={closeMenus}
+              >
+                <span className="font-didot text-[20px] font-normal leading-none text-[#17141a] transition-transform duration-300 group-hover:translate-x-1 sm:text-[24px]">
+                  {item.label}
+                </span>
+                <span className="text-right font-pretendard text-[9px] font-light uppercase tracking-[0.24em] text-[#9a93a5] sm:text-[10px]">
+                  {item.sub}
+                </span>
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   )

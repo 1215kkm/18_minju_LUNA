@@ -12,6 +12,9 @@ import SignupPage from './components/pages/SignupPage'
 import HighlighterShopPage from './components/pages/HighlighterShopPage'
 import BrandPage from './components/pages/BrandPage'
 import CartPage from './components/pages/CartPage'
+import AboutPage from './components/pages/AboutPage'
+import IngredientPage from './components/pages/IngredientPage'
+import ContactPage from './components/pages/ContactPage'
 
 function AppRoutes() {
   const [hash, setHash] = useState(window.location.hash)
@@ -41,6 +44,9 @@ function AppRoutes() {
   if (hash === '#/signup') return <SignupPage />
   if (hash === '#/brand') return <BrandPage />
   if (hash === '#/cart') return <CartPage />
+  if (hash === '#/about') return <AboutPage />
+  if (hash === '#/ingredient') return <IngredientPage />
+  if (hash === '#/contact') return <ContactPage />
 
   return (
     <Layout>
