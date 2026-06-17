@@ -37,19 +37,19 @@ function AboutPage() {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:items-center lg:gap-16">
               {/* 타이틀 블록 */}
               <div>
-                <p className="font-pretendard text-[9px] font-light uppercase tracking-[0.32em] text-[#1e1b22]/70">
+                <p className="font-pretendard text-[11px] font-light uppercase tracking-[0.32em] text-[#1e1b22]/70">
                   About
                 </p>
                 <h1 className="mt-5 font-didot text-[28px] font-normal leading-[1.1] tracking-[0.01em] text-[#17141a] sm:text-[36px] lg:text-[44px]">
                   Who We Are
                 </h1>
-                <p className="mt-8 font-pretendard text-[17px] font-medium leading-[1.65] text-[#1e1b22] sm:text-[18px]">
+                <p className="mt-4 font-pretendard text-[17px] font-medium leading-[1.65] text-[#1e1b22] sm:text-[18px]">
                   조용히 머무는 빛을 만드는 사람들.
                 </p>
               </div>
 
               {/* 설명 블록 */}
-              <div className="space-y-5 font-pretendard text-[14px] font-light leading-[1.95] text-[#3a3640] sm:text-[14.5px]">
+              <div className="space-y-5 break-keep font-pretendard text-[16px] font-light leading-[1.78] text-[#3a3640] sm:text-[17px] lg:text-[18px]">
                 {bodyBlocks.map((block) => (
                   <p key={block}>{block}</p>
                 ))}
