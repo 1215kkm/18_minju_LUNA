@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: '/LUNARE/',
+  base: '/18_minju_LUNA/',
   plugins: [
     react(),
     tailwindcss(),
